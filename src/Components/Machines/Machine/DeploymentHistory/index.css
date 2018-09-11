@@ -1,0 +1,17 @@
+/*
+ * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
+ */
+.deployments__Box .toolbar {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: white;
+  border: 1px solid rgba(16, 22, 26, 0.15);
+  border-top: 0; }
+
+.deployments__Box .content {
+  height: calc(100% - 40px);
+  border: 1px solid rgba(16, 22, 26, 0.15);
+  border-top: 0; }

@@ -1,0 +1,17 @@
+.mm-sidebar-menu {
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+}
+
+.mm-sidebar-menu-item {
+    //flex-grow: 1;
+}
+
+.mm-sidebar-menu-item a {
+    display: flex;
+    justify-content: start;
+}

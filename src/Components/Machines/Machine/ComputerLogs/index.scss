@@ -1,0 +1,25 @@
+@import "@blueprintjs/core/lib/scss/variables";
+
+$toolbar-height: 40px;
+$header-height: 35px;
+$att-list-width: 60%;
+
+.logs__Box{
+  .toolbar{
+    height: $toolbar-height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background: white;
+    border: 1px solid rgba(16,22,26,.15);
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .content{
+    height: calc(100% - #{$toolbar-height});
+    border: 1px solid rgba(16,22,26,.15);
+    border-top: 0;
+  }
+}

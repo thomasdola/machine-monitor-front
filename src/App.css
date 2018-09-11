@@ -1,28 +1,107 @@
+/*
+ * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
+ */
+.table__wrapper {
+  overflow: hidden !important;
+  height: calc(100% - 5px) !important;
+  width: 100% !important;
+  border: none !important;
+  border-radius: 0 !important; }
+  .table__wrapper:focus {
+    outline: none !important; }
+
+.fixedDataTableCellLayout_main:last-child {
+  border-right: 0 !important; }
+
+.table__header {
+  color: #293742 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) !important;
+  background-color: #f5f8fa !important;
+  border: none !important;
+  font-weight: bold !important;
+  font-variant: small-caps; }
+
+.table__cell {
+  border: none !important; }
+
+.table__sort__header {
+  cursor: pointer; }
+
 .App {
-  text-align: center;
-}
+  width: 100%;
+  height: 100vh;
+  display: flex; }
+  .App nav.main__Sidebar {
+    flex: 0 0 auto; }
+  .App section.main__Content {
+    flex: 1 1 auto;
+    overflow: auto; }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+.bottom__Dark {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 50px);
+  background-color: #394b59 !important; }
+  .bottom__Dark a, .bottom__Dark .bp3-button[class*="bp3-icon-"]::before {
+    color: #bfccd6 !important; }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+.mm-small select, .mm-small input.pt-input {
+  height: 24px !important;
+  font-size: 12px !important; }
 
-.App-title {
-  font-size: 1.5em;
-}
+.mm-small .bp3-input:not(:first-child) {
+  padding-left: 25px !important; }
 
-.App-intro {
-  font-size: large;
-}
+.mm-small .bp3-icon {
+  margin: 0 0 3px 7px !important; }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+.mm-small:after, .mm-small .bp3-icon:first-child {
+  line-height: 22px !important;
+  font-size: 14px !important; }
+
+.bp3-input.mm-small {
+  height: 24px !important;
+  line-height: 24px !important;
+  font-size: 12px !important; }
+
+.bp3-input-action.mm-small button {
+  margin: 0 !important; }
+
+.bp3-timepicker.mm-small .bp3-timepicker-arrow-row .bp3-timepicker-arrow-button {
+  font-size: 12px !important;
+  padding: 0 !important; }
+
+.bp3-timepicker.mm-small .bp3-timepicker-input {
+  font-size: 12px !important;
+  height: 24px !important;
+  line-height: 24px !important;
+  width: 22px !important; }
+
+.bp3-timepicker.mm-small .bp3-timepicker-input-row {
+  height: 24px !important;
+  line-height: 24px !important;
+  width: 60px !important; }
+
+.mm-button:focus {
+  outline: none !important; }
+
+.mm-multi-select {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-left: 10px !important; }
+  .bp3-popover-target, .bp3-popover-wrapper {
+    width: 100% !important; }
+  .mm-multi-select-small {
+    font-size: 12px !important; }
+    .mm-multi-select-small .bp3-icon {
+      height: 14px !important; }
+
+.bp3-dialog-header-title {
+  font-variant: small-caps; }
+
+.transparent__back {
+  background-color: transparent !important; }

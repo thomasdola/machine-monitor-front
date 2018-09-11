@@ -1,0 +1,22 @@
+@import "@blueprintjs/core/lib/scss/variables";
+
+.login__Page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $dark-gray5 !important;
+  height: 100vh;
+
+  //a, .bp3-button[class*="bp3-icon-"]::before {
+  //  color: #bfccd6 !important;
+  //}
+
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30%;
+    height: 200px;
+  }
+}

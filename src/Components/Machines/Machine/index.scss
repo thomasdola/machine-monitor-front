@@ -1,0 +1,78 @@
+@import "@blueprintjs/core/lib/scss/variables";
+
+$toolbar-height: 40px;
+$header-height: 35px;
+$att-list-width: 60%;
+
+.machine__Page {
+  display: flex;
+  height: 100%;
+
+  .control__And__Info__Box {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .info__Box{
+      width: 100%;
+      display: flex;
+      height: calc(100% - 150px - #{$toolbar-height});
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      .power {
+        margin-bottom: 10px;
+      }
+
+      .Meta, .Applications, .Services {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .row {
+          width: 80%;
+          height: 35px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .name {
+            font-weight: bolder;
+            font-variant: small-caps;
+          }
+        }
+      }
+    }
+
+    .control__Box{
+      width: 100%;
+      height: $toolbar-height;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      background: white;
+      border-top: 1px solid rgba(16,22,26,.15);
+    }
+  }
+
+  .deployments__Box {
+    width: 25%;
+    height: 100%;
+  }
+
+  .issues__Box {
+    width: 25%;
+    height: 100%;
+  }
+
+  .logs__Box {
+    width: 25%;
+    height: 100%;
+  }
+}

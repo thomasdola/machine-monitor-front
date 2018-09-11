@@ -1,0 +1,33 @@
+.MoreInfo{
+    
+    .InfoBody{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .power{
+            margin-bottom: 10px;
+        }
+
+        .Meta, .Applications, .Services{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+
+            .row{
+                width: 60%;
+                height: 35px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .name{
+                    font-weight: bolder;
+                }
+            }
+        }
+    }
+}
