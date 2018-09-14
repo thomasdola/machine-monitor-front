@@ -20,7 +20,7 @@ import {Timeline, TimelineEvent} from 'react-event-timeline'
 import "./index.css";
 import {DateInput, DateRangeInput} from "@blueprintjs/datetime";
 import {bindActionCreators} from "redux";
-import {loadMRWIssues} from "../../../../actions/MRWsActions";
+import {getMachineIssues} from "../../../../actions/MachineActions";
 import connect from "react-redux/es/connect/connect";
 
 class IssuesTracker extends React.Component {
@@ -32,17 +32,17 @@ class IssuesTracker extends React.Component {
     };
 
     componentDidMount() {
-        const {match: {params: {mrw}}, loadMRWIssues} = this.props;
-        loadMRWIssues(mrw, "name");
+        const {match: {params: {mrw}}, getMachineIssues, authUser: {token}} = this.props;
+        getMachineIssues(mrw, {}, token);
     }
 
     render() {
-        const {MRWIssues: {issues}, loadingIssues, loadingIssuesFailed} = this.props;
+        const {loadingMachineIssues, loadingMachineIssuesFailed, machineIssues} = this.props;
 
         return [
             <div key={"toolbar"} className="toolbar">
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {false
+                    {loadingMachineIssues
                         ? <Spinner className="bp3-small"/>
                         : <Icon icon="list"/>
                     }
@@ -149,11 +149,11 @@ class IssuesTracker extends React.Component {
                 </div>
             </div>,
             <div key={"content"}>
-                {loadingIssues
+                {loadingMachineIssues
                     ? (
                         <div className="loadingDiv"><Spinner/></div>
                     )
-                    : loadingIssuesFailed
+                    : loadingMachineIssuesFailed
                         ? (
                             <div className="power">
                                 <Tag large intent={Intent.DANGER}>MRW Not Found !</Tag>
@@ -161,9 +161,10 @@ class IssuesTracker extends React.Component {
                         )
                         : (
                             <Timeline>
-                                {issues.map(({report_date, reported_to, occurrence_date, resolved, description, resolved_by, observation, resolution_date}) => {
+                                {machineIssues.map(({id, report_date, reported_to, occurrence_date, resolved, description, resolved_by, observation, resolution_date}) => {
                                     return (
                                         <TimelineEvent
+                                            key={id}
                                             title={`Reported to ${reported_to} on ${report_date}`}
                                             createdAt={`Occurred on ${occurrence_date}`}
                                             iconColor={Colors.WHITE}
@@ -242,82 +243,6 @@ class IssuesTracker extends React.Component {
                             </Timeline>
                         )
                 }
-
-
-                {/*<Timeline>*/}
-                {/*<TimelineEvent title="Reported to John Doe on 2016-09-12 10:06 PM"*/}
-                {/*createdAt="Occurred on 2016-09-12 10:06 PM"*/}
-                {/*iconColor={Colors.WHITE}*/}
-                {/*bubbleStyle={{backgroundColor: Colors.RED5}}*/}
-                {/*icon={<span className="bp3-icon-standard bp3-icon-error"/>}*/}
-                {/*>*/}
-                {/*<div className={"content__Container"}>*/}
-                {/*<div className={"description"}>*/}
-                {/*I received the payment for $543. Should be shipping the item within a couple of hours.*/}
-                {/*</div>*/}
-                {/*<div className={"actions"}>*/}
-                {/*<ButtonGroup>*/}
-                {/*<Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>*/}
-                {/*<Button minimal intent={Intent.SUCCESS} className="bp3-small" icon="tick"/>*/}
-                {/*<form style={{padding: 5, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}} action="">*/}
-                {/*<div style={{marginBottom: 5}}>*/}
-                {/*<InputGroup placeholder={"Received from ?"}/>*/}
-                {/*</div>*/}
-                {/*<div style={{marginBottom: 5}}>*/}
-                {/*<FormGroup labelInfo="Received on ?">*/}
-                {/*<DateInput*/}
-                {/*formatDate={date => date.toLocaleString()}*/}
-                {/*onChange={this.handleDateChange}*/}
-                {/*parseDate={str => new Date(str)}*/}
-                {/*placeholder={"M/D/YYYY"}*/}
-                {/*value={this.state.issueResolutionDate}*/}
-                {/*/>*/}
-                {/*</FormGroup>*/}
-                {/*</div>*/}
-                {/*<div style={{marginBottom: 5}}>*/}
-                {/*<FormGroup labelInfo={"Any observations ?"}>*/}
-                {/*<TextArea*/}
-                {/*intent={Intent.NONE}*/}
-                {/*/>*/}
-                {/*</FormGroup>*/}
-                {/*</div>*/}
-                {/*<ButtonGroup fill minimal>*/}
-                {/*<Button minimal small intent={Intent.DANGER}*/}
-                {/*icon="cross"/>*/}
-                {/*<Button minimal small intent={Intent.SUCCESS}*/}
-                {/*icon="tick"/>*/}
-                {/*</ButtonGroup>*/}
-                {/*</form>*/}
-                {/*</Popover>*/}
-                {/*</ButtonGroup>*/}
-                {/*</div>*/}
-                {/*</div>*/}
-                {/*</TimelineEvent>*/}
-                {/*<TimelineEvent*/}
-                {/*title="You sent an email to John Doe"*/}
-                {/*createdAt="2016-09-11 09:06 AM"*/}
-                {/*iconColor={Colors.WHITE}*/}
-                {/*bubbleStyle={{backgroundColor: Colors.GREEN5}}*/}
-                {/*icon={<span className="bp3-icon-standard bp3-icon-tick"/>}*/}
-                {/*>*/}
-                {/*<div className="content__Container">*/}
-                {/*<div className="description">*/}
-                {/*Like we talked, you said that you would share the shipment details? This is an urgent order and*/}
-                {/*so I*/}
-                {/*am losing patience.*/}
-                {/*</div>*/}
-                {/*<div className="resolution" style={{marginTop: 10}}>*/}
-                {/*<blockquote className="bp3-blockquote">*/}
-                {/*<header className="title">Received from*/}
-                {/*<span className={"bp3-text-muted"}>John Doe</span> on*/}
-                {/*<span className={"bp3-text-muted"}>2016-09-11 09:06 AM</span>*/}
-                {/*</header>*/}
-                {/*Can you expedite the process and pls do share the details asap. Consider this a gentle reminder if you are on track already!*/}
-                {/*</blockquote>*/}
-                {/*</div>*/}
-                {/*</div>*/}
-                {/*</TimelineEvent>*/}
-                {/*</Timeline>*/}
             </div>
         ];
     }
@@ -334,16 +259,17 @@ class IssuesTracker extends React.Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         match: PropTypes.object.isRequired,
+        authUser: PropTypes.object.isRequired,
 
-        loadingIssuesFailed: PropTypes.bool.isRequired,
-        MRWIssues: PropTypes.object.isRequired,
-        loadingIssues: PropTypes.bool.isRequired,
-        loadMRWIssues: PropTypes.func.isRequired,
+        loadingMachineIssuesFailed: PropTypes.bool.isRequired,
+        machineIssues: PropTypes.array.isRequired,
+        loadingMachineIssues: PropTypes.bool.isRequired,
+        getMachineIssues: PropTypes.func.isRequired,
     }
 }
 
-const mapStateToProps = ({loadingIssues, MRWIssues, loadingIssuesFailed}) => (
-    {loadingIssues, MRWIssues, loadingIssuesFailed});
-const mapDispatchToProps = dispatch => bindActionCreators({loadMRWIssues}, dispatch);
+const mapStateToProps = ({authUser, loadingMachineIssues, machineIssues, loadingMachineIssuesFailed}) => (
+    {authUser, loadingMachineIssues, machineIssues, loadingMachineIssuesFailed});
+const mapDispatchToProps = dispatch => bindActionCreators({getMachineIssues}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IssuesTracker));

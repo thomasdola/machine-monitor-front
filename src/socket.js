@@ -1,7 +1,8 @@
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket", {});
+const token = localStorage.getItem("token");
 
+let socket = new Socket("/socket", {params: {token}});
 socket.connect();
 
 export default socket

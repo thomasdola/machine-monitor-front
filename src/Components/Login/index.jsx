@@ -7,6 +7,7 @@ import {login} from "../../actions/authActions";
 import {connect} from "react-redux";
 import _isEqual from 'lodash/isEqual';
 import {LOGIN, LOGOUT} from "../../helpers/constants";
+import {withRouter} from "react-router-dom";
 
 class Login extends React.Component{
 
@@ -25,7 +26,7 @@ class Login extends React.Component{
             const {action} = OPERATION_SUCCESSFUL;
 
             if(action === LOGIN){
-                this.props.history.push('/');
+                window.location.href = "/";
             }
         }
 
@@ -103,7 +104,10 @@ class Login extends React.Component{
     handleLockClick = () => this.setState({ showPassword: !this.state.showPassword });
 
     handleLoginClick = () => {
-        this.props.login({username: "", password: ""});
+        const {username, password} = this.state;
+        if(username.trim() && password.trim()){
+            this.props.login({email: username, password});
+        }
     };
 
     static propTypes = {
@@ -121,4 +125,4 @@ const mapStateToProps = ({loadingLogin, OPERATION_SUCCESSFUL, OPERATION_FAILED})
     {loadingLogin, OPERATION_SUCCESSFUL, OPERATION_FAILED});
 const mapDispatchToProps = dispatch => bindActionCreators({login}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

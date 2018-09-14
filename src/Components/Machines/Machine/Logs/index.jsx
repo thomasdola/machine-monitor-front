@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Classes, Dialog, Intent, ResizeSensor, Tag, Spinner} from '@blueprintjs/core';
+import {Classes, Dialog, Intent, ResizeSensor, Spinner, Tag} from '@blueprintjs/core';
 import {Cell, Column, Table} from 'fixed-data-table-2';
 import {withRouter} from 'react-router-dom';
-import {loadMRWLogs} from '../../../../actions/MRWsActions';
+import {getMachineLogs} from '../../../../actions/MachineActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import Dimensions from 'react-dimensions';
 import "../../../Table/index.css";
 import "./index.css";
-
-const data = [
-    {date: "12/12/2018", user: "NIATECH", action: "Log out"}
-];
 
 class Logs extends React.Component {
 
@@ -21,8 +16,8 @@ class Logs extends React.Component {
     };
 
     componentDidMount(){
-        const {match: {params: {mrw}}, loadMRWLogs} = this.props;
-        loadMRWLogs(mrw, "name");
+        const {match: {params: {mrw}}, getMachineLogs, authUser: {token}} = this.props;
+        getMachineLogs(mrw, {}, token);
     }
 
     handleResize = (entries) => {
@@ -36,8 +31,8 @@ class Logs extends React.Component {
 
     render() {
         const {logsTableDimensions: {width, height}} = this.state;
-        const {history, match: {params: {mrw}}, MRWLogs: {status, logs}, loadingLogs, loadingLogsFailed} = this.props;
-        console.log(logs);
+        const {history, match: {params: {mrw}}, loadingMachineLogs, loadingMachineLogsFailed, machineLogs} = this.props;
+
         return (
             <Dialog
                 className="Logs"
@@ -51,11 +46,11 @@ class Logs extends React.Component {
             >
                 <div className={`${Classes.DIALOG_BODY} LogsBody`}>
                     {
-                        loadingLogs
+                        loadingMachineLogs
                             ? (
                                 <div className="loadingDiv"><Spinner/></div>
                             )
-                            : loadingLogsFailed
+                            : loadingMachineLogsFailed
                             ? (
                                 <div className="power">
                                     <Tag large intent={Intent.DANGER}>MRW Not Found !</Tag>
@@ -82,19 +77,19 @@ class Logs extends React.Component {
                                             <Column
                                                 columnKey="date"
                                                 header={<Cell className="table__header">Date</Cell>}
-                                                cell={<DateCell className="table__cell" data={logs}/>}
+                                                cell={<DateCell className="table__cell" data={machineLogs}/>}
                                                 width={150}
                                             />
                                             <Column
                                                 columnKey="user"
                                                 header={<Cell className="table__header">User</Cell>}
-                                                cell={<UserCell className="table__cell" data={logs}/>}
+                                                cell={<UserCell className="table__cell" data={machineLogs}/>}
                                                 width={200}
                                             />
                                             <Column
                                                 columnKey="action"
                                                 header={<Cell className="table__header">Action</Cell>}
-                                                cell={<ActionCell className="table__cell" data={logs}/>}
+                                                cell={<ActionCell className="table__cell" data={machineLogs}/>}
                                                 width={100}
                                                 fixedRight
                                             />
@@ -113,11 +108,12 @@ class Logs extends React.Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         match: PropTypes.object.isRequired,
+        authUser: PropTypes.object.isRequired,
 
-        loadingLogsFailed: PropTypes.bool.isRequired,
-        MRWLogs: PropTypes.object.isRequired,
-        loadingLogs: PropTypes.bool.isRequired,
-        loadMRWLogs: PropTypes.func.isRequired,
+        loadingMachineLogs: PropTypes.bool.isRequired,
+        machineLogs: PropTypes.array.isRequired,
+        loadingMachineLogsFailed: PropTypes.bool.isRequired,
+        getMachineLogs: PropTypes.func.isRequired,
     }
 }
 
@@ -157,7 +153,8 @@ class DateCell extends React.PureComponent {
     }
 }
 
-const mapStateToProps = ({loadingLogs, MRWLogs, loadingLogsFailed}) => ({loadingLogs, MRWLogs, loadingLogsFailed});
-const mapDispatchToProps = dispatch => bindActionCreators({loadMRWLogs}, dispatch);
+const mapStateToProps = ({authUser, loadingMachineLogs, machineLogs, loadingMachineLogsFailed}) => (
+    {authUser, loadingMachineLogs, machineLogs, loadingMachineLogsFailed});
+const mapDispatchToProps = dispatch => bindActionCreators({getMachineLogs}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)((Logs)));

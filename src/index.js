@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Socket} from "phoenix";
 import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import '@blueprintjs/select/lib/css/blueprint-select.css';
@@ -12,7 +13,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Can from "./helpers/Can";
-import {loginSuccessful, logout} from "./actions/authActions";
+import {loginSuccessful, logout, socketReady} from "./actions/authActions";
 import Login from "./Components/Login";
 
 export const AuthorizedRoute = ({ component: Component, user: {root}, user, page, ...rest }) => {
@@ -64,9 +65,23 @@ let isAuthenticated = false;
 const store = configureStore();
 const authUser = localStorage.getItem("user");
 if(authUser !== null){
-    store.dispatch(loginSuccessful(JSON.parse(authUser)));
-    // idleLogout(10000, () => store.dispatch(logout()));
-    isAuthenticated = true;
+    const parsedUser = JSON.parse(authUser);
+    if(parsedUser){
+
+        let socket = new Socket("/socket", {params: {token: parsedUser.token}});
+        socket.connect();
+        let userChannel = socket.channel(parsedUser.channel, {token: parsedUser.token});
+        userChannel.join()
+            .receive("ok", resp => { console.log("Joined successfully", resp) })
+            .receive("error", resp => { console.log("Unable to join", resp) });
+
+        store.dispatch(loginSuccessful(parsedUser));
+        store.dispatch(socketReady({socket, userChannel}));
+        isAuthenticated = true;
+
+        /*How long before the system logs out automatically*/
+        idleLogout(100000, () => store.dispatch(logout(parsedUser.token)));
+    }
 }
 
 ReactDOM.render(

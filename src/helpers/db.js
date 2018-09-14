@@ -5,24 +5,29 @@ import {makeid} from '../helpers';
 
 
 export default {
-    mrws: _range(1, 20).map(n => {
+    machines: _range(1, 20).map(n => {
+        const name = `MRW ${_padStart(`${n}`, 4, '0')}`;
         return {
             id: `${makeid()}`,
-            name: `MRW ${_padStart(`${n}`, 4, '0')}`,
-            status: _shuffle(['OFF', 'ON'])[0],
+            name,
+            user: name,
+            power: _shuffle(['OFF', 'ON'])[0],
             applications: [
                 {name: "Enrolment", status: _shuffle(['Running', 'Stopped'])[0]},
                 {name: "Issuance", status: _shuffle(['Running', 'Stopped'])[0]},
             ], 
             services: [
                 {name: "Card Reader", status: _shuffle(['Running', 'Stopped'])[0]},
-                {name: "X-Info Tech", status: _shuffle(['Running', 'Stopped'])[0]},
+                {name: "X-Profile Tech", status: _shuffle(['Running', 'Stopped'])[0]},
             ], 
             network: {
                 ip: "10.23.523.12", 
+                interface: "MOBILE",
                 provider: _shuffle(['MTN', 'VODAFONE'])[0],
-                interface: "MOBILE"
-            }, 
+                uploads: 65214,
+                downloads: 302145,
+                speed: 20123,
+            },
             logs: [
                 {date: (new Date()).toDateString(), user: "NIATECH", action: _shuffle(['Log In', 'Log Out'])[0]}
             ],
@@ -31,6 +36,7 @@ export default {
             ],
             issues: [
                 {
+                    id: 1,
                     occurrence_date: (new Date()).toDateString(),
                     report_date: (new Date()).toDateString(),
                     reported_to: "John Doe",
@@ -38,6 +44,7 @@ export default {
                     resolved: false
                 },
                 {
+                    id: 2,
                     occurrence_date: (new Date()).toDateString(),
                     report_date: (new Date()).toDateString(),
                     reported_to: "Jane Doe",

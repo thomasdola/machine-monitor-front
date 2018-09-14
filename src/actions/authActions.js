@@ -1,23 +1,26 @@
 import * as actions from '../helpers/constants';
-import Auth from "../api/mock/Auth";
+// import Auth from "../api/mock/Auth";
+import Auth from "../api/actual/Auth";
 import {getTime} from "date-fns";
 
 
 export const loginSuccessful = user => ({type: actions.LOGIN_SUCCESS, user});
 
+export const socketReady = ({socket, userChannel}) => ({type: actions.SOCKET_READY, socket, userChannel});
+
 export const login = credentials => dispatch => {
     dispatch({type: actions.LOGIN});
     return Auth
         .login(credentials)
-        .then(({user}) => {
-            let jsonUser = JSON.stringify(user);
+        .then(({data}) => {
+            let jsonUser = JSON.stringify(data);
             localStorage.setItem("user", jsonUser);
-            dispatch(loginSuccessful(user));
+            dispatch(loginSuccessful(data));
             dispatch({
                 type: actions.OPERATION_SUCCESSFUL,
                 action: actions.LOGIN,
                 timestamp: getTime(Date()),
-                data: {user}
+                data: {data}
             });
         })
         .catch(error => {
@@ -33,11 +36,11 @@ export const login = credentials => dispatch => {
 
 export const logoutSuccessful = () => ({type: actions.LOGOUT_SUCCESS});
 
-export const logout = () => dispatch => {
+export const logout = token => dispatch => {
     dispatch({type: actions.LOGOUT});
     return Auth
-        .logout()
-        .then(({logout}) => {
+        .logout(token)
+        .then(({data: {logout}}) => {
             localStorage.setItem("user", null);
             dispatch(logoutSuccessful());
             dispatch({

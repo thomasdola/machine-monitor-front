@@ -1,18 +1,20 @@
 import { combineReducers } from 'redux';
 import {failed as OPERATION_FAILED, successful as OPERATION_SUCCESSFUL} from './Operation';
-import {info as MRWInfo, loading as loadingInfo, failed as loadingInfoFailed} from './MRWInfo';
-import {logs as MRWLogs, loading as loadingLogs, failed as loadingLogsFailed} from './MRWLogs';
-import {issues as MRWIssues, loading as loadingIssues, failed as loadingIssuesFailed} from './MRWIssues';
-import {deployments as MRWDeployments, loading as loadingDeployments, failed as loadingDeploymentsFailed} from './MRWDeployments';
-import {list as MRWs, loading as loadingMRWs, failed as loadingMRWsFailed} from './MRWs';
+import {profile as machineProfile, loading as loadingMachineProfile, failed as loadingMachineProfileFailed} from './MachineProfile';
+import {logs as machineLogs, loading as loadingMachineLogs, failed as loadingMachineLogsFailed} from './MachineLogs';
+import {issues as machineIssues, loading as loadingMachineIssues, failed as loadingMachineIssuesFailed} from './MachineIssues';
+import {deployments as machineDeployments, loading as loadingMachineDeployments, failed as loadingMachineDeploymentsFailed} from './MachineDeployments';
+import {list as machines, loading as loadingMachines, failed as loadingMachinesFailed} from './Machines';
 import {user as authUser, authenticated as userAuthenticated, locked as sessionLocked, loadingLogin, loadingLogout} from './Auth';
+import {socket, userChannel} from './Socket';
 
 export default combineReducers({
+    socket, userChannel,
     OPERATION_FAILED, OPERATION_SUCCESSFUL,
     authUser, userAuthenticated, sessionLocked, loadingLogin, loadingLogout,
-    loadingInfo, MRWInfo, loadingInfoFailed,
-    loadingLogs, MRWLogs, loadingLogsFailed,
-    loadingMRWs, MRWs, loadingMRWsFailed,
-    loadingIssues, loadingIssuesFailed, MRWIssues,
-    loadingDeployments, loadingDeploymentsFailed, MRWDeployments
+    loadingMachineProfile, machineProfile, loadingMachineProfileFailed,
+    machineLogs, loadingMachineLogs, loadingMachineLogsFailed,
+    loadingMachines, machines, loadingMachinesFailed,
+    loadingMachineIssues, loadingMachineIssuesFailed, machineIssues,
+    loadingMachineDeployments, loadingMachineDeploymentsFailed, machineDeployments
 });

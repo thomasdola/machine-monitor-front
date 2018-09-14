@@ -36,6 +36,7 @@ class Header extends React.Component{
 
             if(action === LOGOUT){
                 this.props.history.replace('/auth/login');
+                // window.location.href = "/auth/login";
             }
         }
 
@@ -50,7 +51,8 @@ class Header extends React.Component{
     }
 
     logout = () => {
-        this.props.logout();
+        const {authUser: {token}, logout} = this.props;
+        logout(token);
     };
 
     render(){
@@ -95,14 +97,15 @@ class Header extends React.Component{
         history: PropTypes.object.isRequired,
         logout: PropTypes.func.isRequired,
 
+        authUser: PropTypes.object.isRequired,
         OPERATION_SUCCESSFUL: PropTypes.object.isRequired,
         OPERATION_FAILED: PropTypes.object.isRequired,
         loadingLogout: PropTypes.bool.isRequired
     };
 }
 
-const mapStateToProps = ({loadingLogout, OPERATION_SUCCESSFUL, OPERATION_FAILED}) => (
-    {loadingLogout, OPERATION_SUCCESSFUL, OPERATION_FAILED});
+const mapStateToProps = ({authUser, loadingLogout, OPERATION_SUCCESSFUL, OPERATION_FAILED}) => (
+    {authUser, loadingLogout, OPERATION_SUCCESSFUL, OPERATION_FAILED});
 const mapDispatchToProps = dispatch => bindActionCreators({logout}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

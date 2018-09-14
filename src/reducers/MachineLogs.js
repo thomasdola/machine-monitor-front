@@ -1,9 +1,9 @@
 import * as actions from '../helpers/constants';
 
-export const issues = (state = {status: undefined, issues: []}, action) => {
+export const logs = (state = [], action) => {
     switch (action.type){
-        case actions.LOAD_MRW_ISSUES_SUCCESS:
-            return action.mrw;
+        case actions.LOAD_MACHINE_LOGS_SUCCESS:
+            return action.logs;
         default:
             return state;
     }
@@ -11,10 +11,10 @@ export const issues = (state = {status: undefined, issues: []}, action) => {
 
 export const failed = (state = false, action) => {
     switch (action.type){
-        case actions.LOAD_MRW_ISSUES_SUCCESS:
-        case actions.LOAD_MRW_ISSUES:
+        case actions.LOAD_MACHINE_LOGS_SUCCESS:
+        case actions.LOAD_MACHINE_LOGS:
             return false;
-        case actions.LOAD_MRW_ISSUES_FAILED:
+        case actions.LOAD_MACHINE_LOGS_FAILED:
             return true;
         default:
             return state;
@@ -23,10 +23,10 @@ export const failed = (state = false, action) => {
 
 export const loading = (state = false, action) => {
     switch (action.type){
-        case actions.LOAD_MRW_ISSUES:
+        case actions.LOAD_MACHINE_LOGS:
             return true;
-        case actions.LOAD_MRW_ISSUES_SUCCESS:
-        case actions.LOAD_MRW_ISSUES_FAILED:
+        case actions.LOAD_MACHINE_LOGS_SUCCESS:
+        case actions.LOAD_MACHINE_LOGS_FAILED:
             return false;
         default:
             return state;

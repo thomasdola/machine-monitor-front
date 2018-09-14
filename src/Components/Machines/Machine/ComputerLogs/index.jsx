@@ -4,7 +4,8 @@ import {withRouter} from "react-router-dom";
 import {
     Button,
     ButtonGroup,
-    Icon, InputGroup,
+    Icon,
+    InputGroup,
     Intent,
     Popover,
     PopoverInteractionKind,
@@ -13,7 +14,7 @@ import {
     Text
 } from "@blueprintjs/core";
 import {bindActionCreators} from "redux";
-import {loadMRWLogs} from "../../../../actions/MRWsActions";
+import {getMachineLogs} from "../../../../actions/MachineActions";
 import {connect} from "react-redux";
 import "../../../Table/index.css";
 import LogsTable from './Table';
@@ -28,18 +29,18 @@ class ComputerLogs extends React.Component {
     };
 
     componentDidMount() {
-        const {match: {params: {mrw}}, loadMRWLogs} = this.props;
-        loadMRWLogs(mrw, "name");
+        const {match: {params: {mrw}}, getMachineLogs, authUser: {token}} = this.props;
+        getMachineLogs(mrw, {}, token);
     }
 
     render() {
 
-        const {MRWLogs: {logs}, loadingLogs, loadingLogsFailed} = this.props;
+        const {machineLogs, loadingMachineLogs, loadingMachineLogsFailed} = this.props;
 
         return [
             <div key={"toolbar"} className="toolbar">
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {false
+                    {loadingMachineLogs
                         ? <Spinner className="bp3-small"/>
                         : <Icon icon="list"/>
                     }
@@ -88,18 +89,18 @@ class ComputerLogs extends React.Component {
                 </div>
             </div>,
             <div key={"content"} className={"content"}>
-                {loadingLogs
+                {loadingMachineLogs
                     ? (
                         <div className="loadingDiv"><Spinner/></div>
                     )
-                    : loadingLogsFailed
+                    : loadingMachineLogsFailed
                         ? (
                             <div className="power">
                                 <Tag large intent={Intent.DANGER}>MRW Not Found !</Tag>
                             </div>
                         )
                         : (
-                            <LogsTable logs={logs}/>
+                            <LogsTable logs={machineLogs}/>
                         )
                 }
             </div>
@@ -114,15 +115,17 @@ class ComputerLogs extends React.Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         match: PropTypes.object.isRequired,
+        authUser: PropTypes.object.isRequired,
 
-        loadingLogsFailed: PropTypes.bool.isRequired,
-        MRWLogs: PropTypes.object.isRequired,
-        loadingLogs: PropTypes.bool.isRequired,
-        loadMRWLogs: PropTypes.func.isRequired,
+        loadingMachineLogsFailed: PropTypes.bool.isRequired,
+        machineLogs: PropTypes.array.isRequired,
+        loadingMachineLogs: PropTypes.bool.isRequired,
+        getMachineLogs: PropTypes.func.isRequired,
     }
 }
 
-const mapStateToProps = ({loadingLogs, MRWLogs, loadingLogsFailed}) => ({loadingLogs, MRWLogs, loadingLogsFailed});
-const mapDispatchToProps = dispatch => bindActionCreators({loadMRWLogs}, dispatch);
+const mapStateToProps = ({authUser, loadingMachineLogs, machineLogs, loadingMachineLogsFailed}) => (
+    {authUser, loadingMachineLogs, machineLogs, loadingMachineLogsFailed});
+const mapDispatchToProps = dispatch => bindActionCreators({getMachineLogs}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComputerLogs));

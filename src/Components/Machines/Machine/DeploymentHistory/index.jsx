@@ -1,10 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from "react-router-dom";
-import {Button, ButtonGroup, Icon, InputGroup, Intent, Popover, Spinner, Tag, Text, PopoverInteractionKind} from "@blueprintjs/core";
+import {
+    Button,
+    ButtonGroup,
+    Icon,
+    InputGroup,
+    Intent,
+    Popover,
+    PopoverInteractionKind,
+    Spinner,
+    Tag,
+    Text
+} from "@blueprintjs/core";
 import "./index.css";
 import {bindActionCreators} from "redux";
-import {loadMRWDeployments} from "../../../../actions/MRWsActions";
+import {getMachineDeployments} from "../../../../actions/MachineActions";
 import connect from "react-redux/es/connect/connect";
 import DeploymentsTable from "./Table";
 import {DateRangeInput} from "@blueprintjs/datetime";
@@ -17,17 +28,17 @@ class DeploymentHistory extends React.Component{
     };
 
     componentDidMount() {
-        const {match: {params: {mrw}}, loadMRWDeployments} = this.props;
-        loadMRWDeployments(mrw, "name");
+        const {match: {params: {mrw}}, getMachineDeployments, authUser: {token}} = this.props;
+        getMachineDeployments(mrw, {}, token);
     }
 
     render(){
-        const {MRWDeployments: {deployments}, loadingDeployments, loadingDeploymentsFailed} = this.props;
+        const {loadingMachineDeployments, loadingMachineDeploymentsFailed, machineDeployments} = this.props;
 
         return [
             <div key={"toolbar"} className="toolbar">
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {false
+                    {loadingMachineDeployments
                         ? <Spinner className="bp3-small"/>
                         : <Icon icon="list"/>
                     }
@@ -99,18 +110,18 @@ class DeploymentHistory extends React.Component{
                 </div>
             </div>,
             <div key={"content"} className={"content"}>
-                {loadingDeployments
+                {loadingMachineDeployments
                     ? (
                         <div className="loadingDiv"><Spinner/></div>
                     )
-                    : loadingDeploymentsFailed
+                    : loadingMachineDeploymentsFailed
                         ? (
                             <div className="power">
                                 <Tag large intent={Intent.DANGER}>MRW Not Found !</Tag>
                             </div>
                         )
                         : (
-                            <DeploymentsTable deployments={deployments}/>
+                            <DeploymentsTable deployments={machineDeployments}/>
                         )
                 }
             </div>
@@ -125,16 +136,17 @@ class DeploymentHistory extends React.Component{
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         match: PropTypes.object.isRequired,
+        authUser: PropTypes.object.isRequired,
 
-        loadingDeploymentsFailed: PropTypes.bool.isRequired,
-        MRWDeployments: PropTypes.object.isRequired,
-        loadingDeployments: PropTypes.bool.isRequired,
-        loadMRWDeployments: PropTypes.func.isRequired,
+        loadingMachineDeploymentsFailed: PropTypes.bool.isRequired,
+        machineDeployments: PropTypes.array.isRequired,
+        loadingMachineDeployments: PropTypes.bool.isRequired,
+        getMachineDeployments: PropTypes.func.isRequired,
     }
 }
 
-const mapStateToProps = ({loadingDeployments, MRWDeployments, loadingDeploymentsFailed}) => (
-    {loadingDeployments, MRWDeployments, loadingDeploymentsFailed});
-const mapDispatchToProps = dispatch => bindActionCreators({loadMRWDeployments}, dispatch);
+const mapStateToProps = ({authUser, loadingMachineDeployments, machineDeployments, loadingMachineDeploymentsFailed}) => (
+    {authUser, loadingMachineDeployments, machineDeployments, loadingMachineDeploymentsFailed});
+const mapDispatchToProps = dispatch => bindActionCreators({getMachineDeployments}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DeploymentHistory));

@@ -5,7 +5,7 @@ export default class Auth{
     static login(credentials){
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve({user: db.user})
+                resolve({data: {user: db.user}})
             }, delay);
         });
     }
@@ -13,7 +13,7 @@ export default class Auth{
     static logout(){
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve({logout: true})
+                resolve({data: {logout: true}})
             }, delay);
         });
     }

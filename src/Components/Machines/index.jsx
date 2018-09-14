@@ -4,11 +4,12 @@ import MRW from './Thumbnail/index';
 import {withRouter} from "react-router-dom";
 import {Hotkey, Hotkeys, HotkeysTarget, Intent, Spinner, Tag} from '@blueprintjs/core';
 import Search from '../Search/index';
-import {loadMRWs} from '../../actions/MRWsActions';
+import {loadMachines} from '../../actions/MachinesActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import "./index.css";
+import {initListeners, onMachinesUpdated} from "../../actions/socket/MachinesActions";
 
 class Machines extends React.Component {
 
@@ -17,7 +18,9 @@ class Machines extends React.Component {
     };
 
     componentDidMount() {
-        this.props.loadMRWs({});
+        const {authUser: {token}, loadMachines, userChannel, onMachinesUpdated} = this.props;
+        initListeners({channel: userChannel, onMachinesUpdated});
+        loadMachines({}, token);
     }
 
     renderHotkeys() {
@@ -43,23 +46,23 @@ class Machines extends React.Component {
             <div key="dashboard" className="Dashboard bp3-elevation-1">
 
                 <Search
-                    MRWs={this.props.MRWs}
+                    MRWs={this.props.machines}
                     isOpen={this.state.isOmnibarOpen}
                     onMRWSelect={this.handleItemSelect}
                     onClose={this.handleOmnibarClose}
                 />
                 {
-                    this.props.loadingMRWs
+                    this.props.loadingMachines
                         ? <div className="loadingDiv"><Spinner/></div>
-                        : this.props.loadingMRWsFailed
+                        : this.props.loadingMachinesFailed
                         ? (
                             <div className="power">
                                 <Tag large minimal intent={Intent.DANGER}>Whoops! Something went wrong</Tag>
                             </div>
                         )
                         : (
-                            this.props.MRWs.map(({name, status}) => (
-                                <MRW key={name} active={status === 'ON'} name={name}/>
+                            this.props.machines.map(({name, power}) => (
+                                <MRW key={name} active={power === 'ON'} name={name}/>
                             ))
                         )
                 }
@@ -79,15 +82,19 @@ class Machines extends React.Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         match: PropTypes.object.isRequired,
+        authUser: PropTypes.object.isRequired,
+        userChannel: PropTypes.object.isRequired,
 
-        loadMRWs: PropTypes.func.isRequired,
-        MRWs: PropTypes.array.isRequired,
-        loadingMRWs: PropTypes.bool.isRequired,
-        loadingMRWsFailed: PropTypes.bool.isRequired,
+        loadMachines: PropTypes.func.isRequired,
+        onMachinesUpdated: PropTypes.func.isRequired,
+        machines: PropTypes.array.isRequired,
+        loadingMachines: PropTypes.bool.isRequired,
+        loadingMachinesFailed: PropTypes.bool.isRequired,
     }
 }
 
-const mapStateToProps = ({MRWs, loadingMRWs, loadingMRWsFailed}) => ({MRWs, loadingMRWs, loadingMRWsFailed});
-const mapDispatchToProps = dispatch => bindActionCreators({loadMRWs}, dispatch);
+const mapStateToProps = ({authUser, userChannel, machines, loadingMachines, loadingMachinesFailed}) => (
+    {authUser, userChannel, machines, loadingMachines, loadingMachinesFailed});
+const mapDispatchToProps = dispatch => bindActionCreators({loadMachines, onMachinesUpdated}, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HotkeysTarget(Machines)));

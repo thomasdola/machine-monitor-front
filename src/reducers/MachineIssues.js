@@ -1,9 +1,9 @@
 import * as actions from '../helpers/constants';
 
-export const info = (state = {network: {}, applications: [], services: []}, action) => {
+export const issues = (state = [], action) => {
     switch (action.type){
-        case actions.LOAD_MRW_INFORMATION_SUCCESS:
-            return action.mrw;
+        case actions.LOAD_MACHINE_ISSUES_SUCCESS:
+            return action.issues;
         default:
             return state;
     }
@@ -11,10 +11,10 @@ export const info = (state = {network: {}, applications: [], services: []}, acti
 
 export const failed = (state = false, action) => {
     switch (action.type){
-        case actions.LOAD_MRW_INFORMATION_SUCCESS:
-        case actions.LOAD_MRW_INFORMATION:
+        case actions.LOAD_MACHINE_ISSUES_SUCCESS:
+        case actions.LOAD_MACHINE_ISSUES:
             return false;
-        case actions.LOAD_MRW_INFORMATION_FAILED:
+        case actions.LOAD_MACHINE_ISSUES_FAILED:
             return true;
         default:
             return state;
@@ -23,10 +23,10 @@ export const failed = (state = false, action) => {
 
 export const loading = (state = false, action) => {
     switch (action.type){
-        case actions.LOAD_MRW_INFORMATION:
+        case actions.LOAD_MACHINE_ISSUES:
             return true;
-        case actions.LOAD_MRW_INFORMATION_SUCCESS:
-        case actions.LOAD_MRW_INFORMATION_FAILED:
+        case actions.LOAD_MACHINE_ISSUES_SUCCESS:
+        case actions.LOAD_MACHINE_ISSUES_FAILED:
             return false;
         default:
             return state;

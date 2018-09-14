@@ -34,7 +34,7 @@ class Machine extends React.Component {
     }
 
     renderContextMenu = () => {
-        // return a Machine element, or nothing to use default browser behavior
+        // return a Machines element, or nothing to use default browser behavior
         return (
             <Menu>
                 <a className="bp3-menu-item bp3-icon-info-sign">More Information</a>
