@@ -6,6 +6,11 @@ import {AuthorizedRoute} from '../../index';
 import * as gates from '../../api/constants/Gates';
 import {connect} from "react-redux";
 
+const Dashboard = Loadable({
+    loader: () => import('../Dashboard'),
+    loading: () => <Loading/>,
+});
+
 const Machines = Loadable({
     loader: () => import('../Machines'),
     loading: () => <Loading/>,
@@ -25,6 +30,7 @@ class Content extends React.Component{
     render(){
         const {authUser: user} = this.props;
         return [
+            
             <AuthorizedRoute
                 exact
                 key={"Machines"}
@@ -41,7 +47,9 @@ class Content extends React.Component{
                 page={gates.MACHINES}
                 component={Machine}/>,
 
-            <Route key={"Unauthorized"} path={"/unauthorized"} component={Unauthorized}/>
+            <Route key={"Unauthorized"} path={"/unauthorized"} component={Unauthorized}/>,
+
+            <Route exact key={"Dashboard"} path={"/"} component={Dashboard}/>,
         ];
     }
 }

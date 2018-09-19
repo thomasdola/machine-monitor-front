@@ -24,3 +24,25 @@ export const successful = (state = OPERATION_TEMPLATE, action) => {
             return state;
     }
 };
+
+export const started = (state = OPERATION_TEMPLATE, action) => {
+    switch (action.type){
+        case actions.OPERATION_STARTED:
+            return {action: action.action, data: action.data, timestamp: action.timestamp};
+        case actions.RESET_OPERATIONS:
+            return OPERATION_TEMPLATE;
+        default:
+            return state;
+    }
+};
+
+export const timeout = (state = OPERATION_TEMPLATE, action) => {
+    switch (action.type){
+        case actions.OPERATION_TIMEOUT:
+            return {action: action.action, data: action.data, timestamp: action.timestamp};
+        case actions.RESET_OPERATIONS:
+            return OPERATION_TEMPLATE;
+        default:
+            return state;
+    }
+};

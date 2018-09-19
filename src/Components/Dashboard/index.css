@@ -1,0 +1,124 @@
+/*
+ * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
+ */
+.Dashboard {
+  height: 100%;
+  width: 100%;
+  display: flex; }
+  .Dashboard .Box {
+    height: 100%;
+    width: calc(100% / 3);
+    margin-right: 8px;
+    border-radius: 0;
+    padding: 8px 0;
+    border: none;
+    box-shadow: none; }
+    .Dashboard .Box:first-child {
+      margin-left: 8px; }
+    .Dashboard .Box .Row .Item_Header {
+      font-variant: small-caps;
+      color: #394b59; }
+    .Dashboard .Box .Active {
+      display: flex;
+      justify-content: space-evenly;
+      height: 25%; }
+      .Dashboard .Box .Active .Item {
+        width: 50%;
+        height: 100%;
+        margin-right: 8px; }
+        .Dashboard .Box .Active .Item:last-child {
+          margin-right: 0; }
+        .Dashboard .Box .Active .Item .Content {
+          display: flex;
+          justify-content: space-evenly; }
+          .Dashboard .Box .Active .Item .Content .Header {
+            font-variant: small-caps;
+            color: #394b59; }
+          .Dashboard .Box .Active .Item .Content .Value {
+            font-size: 2em; }
+    .Dashboard .Box .Certificates .Content {
+      display: flex;
+      justify-content: space-evenly; }
+      .Dashboard .Box .Certificates .Content .Header {
+        font-variant: small-caps;
+        color: #394b59; }
+      .Dashboard .Box .Certificates .Content .Value {
+        font-size: 2em; }
+    .Dashboard .Box .Consumables {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-evenly;
+      height: 25%; }
+      .Dashboard .Box .Consumables .Item {
+        width: 50%;
+        height: 100%;
+        margin-right: 8px; }
+        .Dashboard .Box .Consumables .Item:last-child {
+          margin-right: 0; }
+        .Dashboard .Box .Consumables .Item .Content {
+          display: flex;
+          justify-content: space-evenly; }
+          .Dashboard .Box .Consumables .Item .Content .Header {
+            font-variant: small-caps;
+            color: #394b59; }
+          .Dashboard .Box .Consumables .Item .Content .Value {
+            font-size: 2em; }
+    .Dashboard .Box .Computer {
+      margin-top: 8px;
+      height: 20%; }
+    .Dashboard .Box .Centers {
+      height: 25%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0; }
+      .Dashboard .Box .Centers .Content {
+        display: flex;
+        justify-content: space-evenly; }
+        .Dashboard .Box .Centers .Content .Header {
+          font-variant: small-caps;
+          color: #394b59; }
+        .Dashboard .Box .Centers .Content .Value {
+          font-size: 2em; }
+    .Dashboard .Box .Centers_Status {
+      height: 75%;
+      max-height: 75%;
+      padding: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0; }
+      .Dashboard .Box .Centers_Status .Header {
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid rgba(16, 22, 26, 0.1);
+        height: 40px;
+        text-align: center;
+        font-variant: small-caps;
+        color: #394b59;
+        font-weight: bold; }
+        .Dashboard .Box .Centers_Status .Header .Name {
+          width: 40%; }
+        .Dashboard .Box .Centers_Status .Header .Computers {
+          width: 20%; }
+        .Dashboard .Box .Centers_Status .Header .Status {
+          width: 40%; }
+      .Dashboard .Box .Centers_Status .Content {
+        height: calc(100% - 40px);
+        overflow-y: auto; }
+        .Dashboard .Box .Centers_Status .Content .Center {
+          text-align: center;
+          padding: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          height: 40px; }
+          .Dashboard .Box .Centers_Status .Content .Center .Name {
+            width: 40%; }
+          .Dashboard .Box .Centers_Status .Content .Center .Computers {
+            width: 20%; }
+          .Dashboard .Box .Centers_Status .Content .Center .Status {
+            width: 40%; }
+    .Dashboard .Box .Uptime {
+      height: 25%; }
+    .Dashboard .Box .Downtime {
+      margin-top: 8px;
+      height: 25%; }

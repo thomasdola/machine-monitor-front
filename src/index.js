@@ -80,7 +80,7 @@ if(authUser !== null){
         isAuthenticated = true;
 
         /*How long before the system logs out automatically*/
-        idleLogout(100000, () => store.dispatch(logout(parsedUser.token)));
+        // idleLogout(100000, () => store.dispatch(logout(parsedUser.token)));
     }
 }
 

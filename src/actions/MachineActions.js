@@ -4,6 +4,8 @@ import Machine from "../api/actual/Machine";
 import {getTime} from "date-fns";
 
 
+export const loading = (start = true) => ({type: actions.LOAD_MACHINE_PROFILE, start})
+
 export const getMachineProfile = (id, type, token) => dispatch => {
     dispatch({type: actions.LOAD_MACHINE_PROFILE});
     return Machine

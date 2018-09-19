@@ -1,0 +1,204 @@
+@import "@blueprintjs/core/lib/scss/variables";
+
+.Dashboard{
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+    .Box{
+        height: 100%;
+        width: calc(100% / 3);
+        margin-right: 8px;
+        border-radius: 0;
+        padding: 8px 0;
+        border: none;
+        box-shadow: none;
+
+        &:first-child{
+            margin-left: 8px;
+        }
+
+        .Row{
+
+            .Item_Header{
+                font-variant: small-caps;
+                color: $dark-gray5;
+            }
+            
+        }
+
+        .Active{
+            display: flex;
+            justify-content: space-evenly;
+            height: 25%;
+
+            .Item{
+                width: 50%;
+                height: 100%;
+                margin-right: 8px;
+                // border-radius: 0;
+
+                &:last-child{
+                    margin-right: 0;
+                }
+
+                .Content{
+                    display: flex;
+                    justify-content: space-evenly;
+    
+                    .Header{
+                        font-variant: small-caps;
+                        color: $dark-gray5;
+                    }
+    
+                    .Value{
+                        font-size: 2em;
+                    }
+                }
+            }
+        }
+
+        .Certificates{
+            .Content{
+                display: flex;
+                justify-content: space-evenly;
+
+                .Header{
+                    font-variant: small-caps;
+                    color: $dark-gray5;
+                }
+
+                .Value{
+                    font-size: 2em;
+                }
+            }
+        }
+
+        .Consumables{
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-evenly;
+            height: 25%;
+
+            .Item{
+                width: 50%;
+                height: 100%;
+                margin-right: 8px;
+                // border-radius: 0;
+
+                &:last-child{
+                    margin-right: 0;
+                }
+
+                .Content{
+                    display: flex;
+                    justify-content: space-evenly;
+    
+                    .Header{
+                        font-variant: small-caps;
+                        color: $dark-gray5;
+                    }
+    
+                    .Value{
+                        font-size: 2em;
+                    }
+                }
+            }
+        }
+
+        .Computer{
+            margin-top: 8px;
+            height: 20%;
+        }
+
+        .Centers{
+            height: 25%;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+
+            .Content{
+                display: flex;
+                justify-content: space-evenly;
+
+                .Header{
+                    font-variant: small-caps;
+                    color: $dark-gray5;
+                }
+
+                .Value{
+                    font-size: 2em;
+                }
+            }
+        }
+
+        .Centers_Status{
+            // margin-top: 8px;
+            height: 75%;
+            max-height: 75%;
+            padding: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+            .Header{
+                padding: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                border-bottom: 1px solid rgba(16, 22, 26, 0.1);
+                height: 40px;
+                text-align: center;
+
+                font-variant: small-caps;
+                color: $dark-gray5;
+                font-weight: bold;
+
+                .Name{
+                    width: 40%;
+                }
+
+                .Computers{
+                    width: 20%;
+                }
+
+                .Status{
+                    width: 40%;
+                }
+            }
+
+            .Content{
+                height: calc(100% - 40px);
+                overflow-y: auto;
+
+                .Center{
+                    text-align: center;
+                    padding: 4px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    height: 40px;
+
+                    .Name{
+                        width: 40%;
+                    }
+
+                    .Computers{
+                        width: 20%;
+                    }
+
+                    .Status{
+                        width: 40%;
+                    }
+                }
+            }
+        }
+
+        .Uptime{
+            height: 25%;
+        }
+
+        .Downtime{
+            margin-top: 8px;
+            height: 25%;
+        }
+    }
+}

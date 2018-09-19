@@ -9,7 +9,7 @@ $att-list-width: 60%;
   height: 100%;
 
   .control__And__Info__Box {
-    width: 25%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,11 +62,6 @@ $att-list-width: 60%;
   }
 
   .deployments__Box {
-    width: 25%;
-    height: 100%;
-  }
-
-  .issues__Box {
     width: 25%;
     height: 100%;
   }

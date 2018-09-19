@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {failed as OPERATION_FAILED, successful as OPERATION_SUCCESSFUL} from './Operation';
+import {failed as OPERATION_FAILED, successful as OPERATION_SUCCESSFUL, started as OPERATION_STARTED, timeout as OPERATION_TIME_OUT} from './Operation';
 import {profile as machineProfile, loading as loadingMachineProfile, failed as loadingMachineProfileFailed} from './MachineProfile';
 import {logs as machineLogs, loading as loadingMachineLogs, failed as loadingMachineLogsFailed} from './MachineLogs';
 import {issues as machineIssues, loading as loadingMachineIssues, failed as loadingMachineIssuesFailed} from './MachineIssues';
@@ -10,7 +10,7 @@ import {socket, userChannel} from './Socket';
 
 export default combineReducers({
     socket, userChannel,
-    OPERATION_FAILED, OPERATION_SUCCESSFUL,
+    OPERATION_FAILED, OPERATION_SUCCESSFUL, OPERATION_STARTED, OPERATION_TIME_OUT,
     authUser, userAuthenticated, sessionLocked, loadingLogin, loadingLogout,
     loadingMachineProfile, machineProfile, loadingMachineProfileFailed,
     machineLogs, loadingMachineLogs, loadingMachineLogsFailed,

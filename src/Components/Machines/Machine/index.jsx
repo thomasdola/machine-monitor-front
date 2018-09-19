@@ -2,7 +2,6 @@ import React from 'react';
 import {withRouter} from "react-router-dom";
 import "./index.css";
 import DeploymentHistory from "./DeploymentHistory";
-import IssuesTracker from "./IssueTracker";
 import ComputerLogs from "./ComputerLogs";
 import Information from "./Profile";
 
@@ -17,9 +16,6 @@ class Machine extends React.Component {
             </div>
             <div className={"deployments__Box"}>
                 <DeploymentHistory/>
-            </div>
-            <div className={"issues__Box"}>
-                <IssuesTracker/>
             </div>
             <div className={"logs__Box"}>
                 <ComputerLogs/>
