@@ -59,6 +59,8 @@
         }
 
         .Certificates{
+            margin-top: 8px;
+
             .Content{
                 display: flex;
                 justify-content: space-evenly;
@@ -193,12 +195,12 @@
         }
 
         .Uptime{
-            height: 25%;
+            height: 35%;
         }
 
         .Downtime{
             margin-top: 8px;
-            height: 25%;
+            height: 35%;
         }
     }
 }
