@@ -23,6 +23,8 @@ import laptop from '../../../../notebook-computer.default.svg';
 import _keys from "lodash/keys";
 import _isEqual from "lodash/isEqual";
 import _find from "lodash/find";
+import _isEmpty from 'lodash/isEmpty';
+import _isBoolean from 'lodash/isBoolean';
 import * as actions from '../../../../helpers/constants';
 
 class Information extends React.Component {
@@ -173,23 +175,17 @@ class Information extends React.Component {
 
                             <div style={{height: 500}} className="Applications" key={"network"}>
                                 <h3>Network</h3>
-                                {   machineProfile.network &&
-                                    machineProfile.network.map(adapter => {
-                                        const id = _find(adapter, ({name}) => name === "id");
+                                {   !_isEmpty(network) &&
+                                    network.map(({name, value}) => {
+                                        // const id = _find(adapter, ({name}) => name === "id");
+                                        value = _isBoolean(value) ? (
+                                            value === true ? "yes" : "no"
+                                        ) : value 
                                         return (
-                                            <div className="row" style={{maxHeight: 400, overflowY: 'auto', display: 'flex', flexDirection: 'column'}}>
-                                                {
-                                                    adapter.map(({name, value}) => {
-
-                                                        return (
-                                                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                                                <span className="name">{name}</span>
-                                                                <span><Tag minimal
-                                                                        intent={Intent.NONE}>{value}</Tag></span>
-                                                            </div>
-                                                        );
-                                                    })
-                                                }
+                                            <div className="row">
+                                                <span className="name">{name}</span>
+                                                    <span><Tag minimal
+                                                            intent={Intent.NONE}>{value}</Tag></span>
                                             </div>
                                         );
                                     })
@@ -242,8 +238,8 @@ class Information extends React.Component {
                                 <AnchorButton minimal fill
                                               onClick={() => this.setState({changePassword: true})}
                                               disabled={!canPerform}
-                                              intent={Intent.WARNING}
-                                              icon="user"
+                                              intent={Intent.PRIMARY}
+                                              icon="lock"
                                               text={"Change Password"}/>
 
                                 <form style={{
@@ -285,9 +281,35 @@ class Information extends React.Component {
                                     <Button
                                         onClick={() => this.setState({confirmPowerOff: true})}
                                         disabled={!canPerform}
+                                        intent={Intent.WARNING}
+                                        icon="refresh"
+                                        text={"Reboot"}/>
+                                </ButtonGroup>
+
+                                <div style={{padding: 10}}>
+                                    <span style={{marginBottom: 10}}>Are you sure?</span>
+                                    <ButtonGroup fill minimal>
+                                        <Button
+                                            onClick={() => this.setState({confirmPowerOff: false})}
+                                            minimal small intent={Intent.DANGER}
+                                                icon="cross"/>
+                                        <Button minimal small intent={Intent.SUCCESS}
+                                                onClick={() => {this.powerOff(); this.setState({confirmPowerOff: false})}}
+                                                icon="tick"/>
+                                    </ButtonGroup>
+                                </div>
+                            </Popover>
+
+                            <Popover isOpen={this.state.confirmPowerOff} interactionKind={PopoverInteractionKind.CLICK}
+                                     disabled={!canPerform}>
+
+                                <ButtonGroup minimal fill>
+                                    <Button
+                                        onClick={() => this.setState({confirmPowerOff: true})}
+                                        disabled={!canPerform}
                                         intent={Intent.DANGER}
                                         icon="power"
-                                        text={"Shut Down"}/>
+                                        text={"Power Off"}/>
                                 </ButtonGroup>
 
                                 <div style={{padding: 10}}>

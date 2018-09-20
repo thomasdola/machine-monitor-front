@@ -195,12 +195,30 @@
         }
 
         .Uptime{
-            height: 35%;
+            height: 30%;
+
+            .Content{
+                height: calc(100% - 22px);
+            }
         }
 
         .Downtime{
             margin-top: 8px;
-            height: 35%;
+            height: 30%;
+
+            .Content{
+                height: calc(100% - 22px);
+            }
+        }
+
+        .CentersStatusChart{
+            box-shadow: none;
+            margin-top: 8px;
+            height: calc(100% - 60% - 40px);
+
+            .Content{
+                height: calc(100% - 22px);
+            }
         }
     }
 }

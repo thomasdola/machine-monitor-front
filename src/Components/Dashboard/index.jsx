@@ -1,38 +1,163 @@
 import React from 'react';
 import {Card, Elevation, Text, Intent, Tag} from '@blueprintjs/core';
-const {ResponsiveContainer, ComposedChart, Line, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} = Recharts;
+import {ResponsiveContainer, ComposedChart, Line, Pie, PieChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Sector, Cell} from 'recharts';
 import "./index.css";
 
-const data = [{name: 'Page A', uv: 590, pv: 800, amt: 1400},
-              {name: 'Page B', uv: 868, pv: 967, amt: 1506},
-              {name: 'Page C', uv: 1397, pv: 1098, amt: 989},
-              {name: 'Page D', uv: 1480, pv: 1200, amt: 1228},
-              {name: 'Page E', uv: 1520, pv: 1108, amt: 1100},
-              {name: 'Page F', uv: 1400, pv: 680, amt: 1700}];
+const data = [{day: 'Monday', seconds: 590},
+              {day: 'Tuesday', seconds: 868},
+              {day: 'Wenesday', seconds: 1397},
+              {day: 'Thursday', seconds: 1480},
+              {day: 'Friday', seconds: 0}];
+
+const centersData = [{name: 'Opened', value: 400}, {name: 'Closed', value: 300}];
+
+const COLORS = ['#0088FE', '#ff7300', '#FFBB28', '#FF8042'];
+
+const RADIAN = Math.PI / 180;                    
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+ 	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x  = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy  + radius * Math.sin(-midAngle * RADIAN);
+ 
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
+    	{`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
+
+const renderActiveShape = (props) => {
+    const RADIAN = Math.PI / 180;
+    const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
+      fill, payload, percent, value } = props;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const sx = cx + (outerRadius + 10) * cos;
+    const sy = cy + (outerRadius + 10) * sin;
+    const mx = cx + (outerRadius + 30) * cos;
+    const my = cy + (outerRadius + 30) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+    const ey = my;
+    const textAnchor = cos >= 0 ? 'start' : 'end';
+  
+    return (
+      <g>
+        <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>{payload.name}</text>
+        <Sector
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          fill={fill}
+        />
+        <Sector
+          cx={cx}
+          cy={cy}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          innerRadius={outerRadius + 6}
+          outerRadius={outerRadius + 10}
+          fill={fill}
+        />
+        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none"/>
+        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none"/>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`Centers ${value}`}</text>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+          {`(Percentage ${(percent * 100).toFixed(2)}%)`}
+        </text>
+      </g>
+    );
+  };
+
+
+class TwoLevelPieChart extends React.Component{
+    
+    state = {
+        activeIndex: 0,
+    };
+
+  onPieEnter = (data, index) => {
+      this.setState({activeIndex: index})
+  }
+
+  render(){
+
+    return (
+        <ResponsiveContainer>
+            <PieChart width={800} height={400}>
+                <Pie 
+                activeIndex={this.state.activeIndex}
+                activeShape={renderActiveShape} 
+                data={centersData} 
+                innerRadius={60}
+                outerRadius={80} 
+                fill="#8884d8"
+                onMouseEnter={this.onPieEnter}
+                >
+                    {
+                        centersData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+                    }
+                </Pie>
+            </PieChart>
+        </ResponsiveContainer>
+    );
+  }
+}
 
 class Dashboard extends React.Component{
 
     render(){
 
-        const LineBarAreaComposedChart = React.createClass({
-            render () {
-              return (
+        const CentersStatusChart = () => {
+            return (
+                <ResponsiveContainer>
+                    <PieChart>
+                        <Pie data={centersData} fill="#8884d8" label={renderCustomizedLabel} innerRadius={40} outerRadius={80}>
+                        {
+                            centersData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+                        }
+                        </Pie>
+                        <Tooltip/>
+                    </PieChart>
+                </ResponsiveContainer>
+            );
+        };
+
+        const UptimeChart = () => {
+            return (
                 <ResponsiveContainer>
                     <ComposedChart width={600} height={400} data={data}
-                      margin={{top: 20, right: 20, bottom: 20, left: 20}}>
+                            margin={{top: 20, right: 20, bottom: 20, left: 20}}>
                         <CartesianGrid stroke='#f5f5f5'/>
-                        <XAxis dataKey="name"/>
+                        <XAxis dataKey="day"/>
                         <YAxis />
                         <Tooltip/>
                         <Legend/>
-                        <Area type='monotone' dataKey='amt' fill='#8884d8' stroke='#8884d8'/>
-                        <Bar dataKey='pv' barSize={20} fill='#413ea0'/>
-                        <Line type='monotone' dataKey='uv' stroke='#ff7300'/>
+                        <Bar dataKey='seconds' barSize={20} fill='#413ea0'/>
+                        <Line type='monotone' dataKey='seconds' stroke='#ff7300'/>
                     </ComposedChart>
                </ResponsiveContainer>
             );
-          }
-        })
+        };
+
+        const DowntimeChart = () => {
+            return (
+                <ResponsiveContainer>
+                    <ComposedChart width={600} height={400} data={data}
+                            margin={{top: 20, right: 20, bottom: 20, left: 20}}>
+                        <CartesianGrid stroke='#f5f5f5'/>
+                        <XAxis dataKey="day"/>
+                        <YAxis />
+                        <Tooltip/>
+                        <Legend/>
+                        <Bar dataKey='seconds' barSize={20} fill='#413ea0'/>
+                        <Line type='monotone' dataKey='seconds' stroke='#ff7300'/>
+                    </ComposedChart>
+               </ResponsiveContainer>
+            );
+        };
 
         return (
             <div className="Dashboard">
@@ -218,12 +343,21 @@ class Dashboard extends React.Component{
                     <Card interactive elevation={Elevation.ONE} className="Row Uptime">
                         <h3 className="Item_Header"><Text ellipsize={true}>Log for Uptime</Text></h3>
                         <div className="Content">
-                            <LineBarAreaComposedChart/>
+                            <UptimeChart/>
                         </div>
                     </Card>
                     <Card interactive elevation={Elevation.ONE} className="Row Downtime">
-                    <h3 className="Item_Header"><Text ellipsize={true}>Log for Downtime</Text></h3>
-                        <p>Card content</p>
+                        <h3 className="Item_Header"><Text ellipsize={true}>Log for Downtime</Text></h3>
+                        <div className="Content">
+                            <UptimeChart/>
+                        </div>
+                    </Card>
+
+                    <Card interactive elevation={Elevation.ONE} className="Row CentersStatusChart">
+                        <h3 className="Item_Header"><Text ellipsize={true}>Centers</Text></h3>
+                        <div className="Content">
+                            <TwoLevelPieChart/>
+                        </div>
                     </Card>
                 </Card>
             </div>

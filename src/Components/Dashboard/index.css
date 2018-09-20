@@ -120,7 +120,17 @@
           .Dashboard .Box .Centers_Status .Content .Center .Status {
             width: 40%; }
     .Dashboard .Box .Uptime {
-      height: 35%; }
+      height: 30%; }
+      .Dashboard .Box .Uptime .Content {
+        height: calc(100% - 22px); }
     .Dashboard .Box .Downtime {
       margin-top: 8px;
-      height: 35%; }
+      height: 30%; }
+      .Dashboard .Box .Downtime .Content {
+        height: calc(100% - 22px); }
+    .Dashboard .Box .CentersStatusChart {
+      box-shadow: none;
+      margin-top: 8px;
+      height: calc(100% - 60% - 40px); }
+      .Dashboard .Box .CentersStatusChart .Content {
+        height: calc(100% - 22px); }
