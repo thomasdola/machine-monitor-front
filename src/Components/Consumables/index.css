@@ -1,0 +1,46 @@
+/*
+ * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
+ */
+.Consumables_Page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  color: #394b59; }
+  .Consumables_Page .type {
+    height: 50%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; }
+    .Consumables_Page .type .Status {
+      display: flex;
+      justify-content: space-evenly; }
+      .Consumables_Page .type .Status .Header {
+        font-variant: small-caps;
+        color: #394b59; }
+      .Consumables_Page .type .Status .Value {
+        font-size: 2em; }
+  .Consumables_Page .logs {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .Consumables_Page .logs .Transaction_History_Card {
+      width: 98%;
+      height: 98%;
+      padding: 0; }
+      .Consumables_Page .logs .Transaction_History_Card .Header {
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid rgba(16, 22, 26, 0.1);
+        height: 40px;
+        text-align: center;
+        font-variant: small-caps;
+        color: #394b59;
+        font-weight: bold; }

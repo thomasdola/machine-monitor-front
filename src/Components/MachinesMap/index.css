@@ -1,0 +1,39 @@
+/*
+ * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
+ */
+.Map__Page {
+  color: #394b59 !important;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%; }
+  .Map__Page .ol-attribution ul, .Map__Page .ol-attribution button {
+    display: none !important; }
+  .Map__Page .Map__Box {
+    width: calc(100% - 200px);
+    height: 100%; }
+    .Map__Page .Map__Box #map {
+      height: 100%; }
+  .Map__Page .Machines__Box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 200px;
+    border-radius: 0;
+    padding: 4px; }
+    .Map__Page .Machines__Box .Header {
+      height: 40px; }
+    .Map__Page .Machines__Box .Content {
+      max-height: calc(100% - 41px);
+      overflow-y: auto; }
+      .Map__Page .Machines__Box .Content .Machine {
+        padding: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px dashed #394b59; }
+        .Map__Page .Machines__Box .Content .Machine .Name {
+          text-align: center;
+          font-size: 1.3em;
+          font-variant: small-caps;
+          width: 80%; }

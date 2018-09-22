@@ -13,16 +13,36 @@ import {
 } from '@blueprintjs/core';
 import {withRouter} from 'react-router-dom';
 import {getMachineProfile, loading} from '../../../../actions/MachineActions';
-import {startListening, onOk, onError, onTimeout, startApplication, startService, changePassword, onApplicationsStatus, onServicesStatus,
-    reboot, powerOff, stopApplication, stopService, onApplicationStatusChanged, onServiceStatusChanged, onLocationStatus, onNetworkStatus,
-    onLocationChanged, onUserActivityChanged, onNetworkChanged, onPasswordChangeDone, systemStatusReport, onDone} from '../../../../actions/socket/MachineActions';
+import {
+    changePassword,
+    onApplicationsStatus,
+    onApplicationStatusChanged,
+    onDone,
+    onError,
+    onLocationChanged,
+    onLocationStatus,
+    onNetworkChanged,
+    onNetworkStatus,
+    onOk,
+    onPasswordChangeDone,
+    onServicesStatus,
+    onServiceStatusChanged,
+    onTimeout,
+    onUserActivityChanged,
+    powerOff,
+    reboot,
+    startApplication,
+    startListening,
+    startService,
+    stopApplication,
+    stopService,
+    systemStatusReport
+} from '../../../../actions/socket/MachineActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import "./index.css";
 import laptop from '../../../../notebook-computer.default.svg';
-import _keys from "lodash/keys";
 import _isEqual from "lodash/isEqual";
-import _find from "lodash/find";
 import _isEmpty from 'lodash/isEmpty';
 import _isBoolean from 'lodash/isBoolean';
 import * as actions from '../../../../helpers/constants';
@@ -333,11 +353,11 @@ class Information extends React.Component {
 
     stringifyStatus = status => {
         return status === 2 ? "Not installed" : (status === 0 ? "Stopped" : "Running")
-    }
+    };
 
     intentifyStatus = status => {
         return status === 2 ? Intent.WARNING : (status === 0 ? Intent.DANGER : Intent.SUCCESS)
-    }
+    };
 
     actionizeStatus = ({name, status}) => {
         return status === 2 ? "" : 0
@@ -349,7 +369,7 @@ class Information extends React.Component {
                 minimal intent={Intent.DANGER}
                 onClick={() => this.stopService(name)}
                 icon={'stop'}>Stop</Button>
-    }
+    };
 
     static propTypes = {
         location: PropTypes.object.isRequired,

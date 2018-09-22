@@ -1,0 +1,61 @@
+@import "@blueprintjs/core/lib/scss/variables";
+
+.Consumables_Page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  color: $dark-gray5;
+
+  .type{
+    height: 50%;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .Status{
+      display: flex;
+      justify-content: space-evenly;
+
+      .Header{
+        font-variant: small-caps;
+        color: $dark-gray5;
+      }
+
+      .Value{
+        font-size: 2em;
+      }
+    }
+  }
+
+  .logs{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .Transaction_History_Card{
+      width: 98%;
+      height: 98%;
+      padding: 0;
+
+      .Header{
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid rgba(16, 22, 26, 0.1);
+        height: 40px;
+        text-align: center;
+
+        font-variant: small-caps;
+        color: $dark-gray5;
+        font-weight: bold;
+      }
+    }
+  }
+}

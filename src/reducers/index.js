@@ -6,6 +6,13 @@ import {issues as machineIssues, loading as loadingMachineIssues, failed as load
 import {deployments as machineDeployments, loading as loadingMachineDeployments, failed as loadingMachineDeploymentsFailed} from './MachineDeployments';
 import {list as machines, loading as loadingMachines, failed as loadingMachinesFailed} from './Machines';
 import {user as authUser, authenticated as userAuthenticated, locked as sessionLocked, loadingLogin, loadingLogout} from './Auth';
+import {actions, loading as loadingActions} from './actions';
+import {entities, loading as loadingEntities} from './entities';
+import {pages, loading as loadingPages} from './pages';
+import {logs as systemLogs, loading as loadingSystemLogs, pagination as systemLogsPagination, exporting as exportingSystemLogs} from './AuditTrail';
+import {policies, loading as loadingPolicies, adding as addingPolicy, editing as editingPolicy, deleting as deletingPolicy} from './policies';
+import {roles, pagination as rolesPagination, deleting as deletingRole, editing as editingRole, adding as addingRole, loading as loadingRoles} from './roles';
+import {users, pagination as usersPagination, loading as loadingUsers, adding as addingUser, editing as editingUser, deleting as deletingUser} from './users';
 import {socket, userChannel} from './Socket';
 
 export default combineReducers({
@@ -16,5 +23,12 @@ export default combineReducers({
     machineLogs, loadingMachineLogs, loadingMachineLogsFailed,
     loadingMachines, machines, loadingMachinesFailed,
     loadingMachineIssues, loadingMachineIssuesFailed, machineIssues,
-    loadingMachineDeployments, loadingMachineDeploymentsFailed, machineDeployments
+    loadingMachineDeployments, loadingMachineDeploymentsFailed, machineDeployments,
+    actions, loadingActions,
+    entities, loadingEntities,
+    pages, loadingPages,
+    policies, loadingPolicies, addingPolicy, editingPolicy, deletingPolicy,
+    roles, rolesPagination, deletingRole, editingRole, addingRole, loadingRoles,
+    users, usersPagination, loadingUsers, addingUser, editingUser, deletingUser,
+    systemLogs, loadingSystemLogs, systemLogsPagination, exportingSystemLogs
 });

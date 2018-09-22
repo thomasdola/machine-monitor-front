@@ -1,0 +1,54 @@
+@import "@blueprintjs/core/lib/scss/variables";
+
+.Map__Page{
+  color: $dark-gray5 !important;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+
+  .ol-attribution ul, .ol-attribution button{
+    display: none !important;}
+
+  .Map__Box{
+    width: calc(100% - 200px);
+    height: 100%;
+
+    #map{
+      height: 100%;
+    }
+  }
+
+  .Machines__Box{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 200px;
+    border-radius: 0;
+    padding: 4px;
+
+    .Header{
+      height: 40px;
+    }
+
+    .Content{
+      max-height: calc(100% - 41px);
+      overflow-y: auto;
+
+      .Machine{
+        padding: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px dashed $dark-gray5;
+
+        .Name{
+          text-align: center;
+          font-size: 1.3em;
+          font-variant: small-caps;
+          width: 80%;
+        }
+      }
+    }
+  }
+}

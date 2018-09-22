@@ -5,26 +5,13 @@ import "./index.css";
 
 const data = [{day: 'Monday', seconds: 590},
               {day: 'Tuesday', seconds: 868},
-              {day: 'Wenesday', seconds: 1397},
+              {day: 'Wednesday', seconds: 1397},
               {day: 'Thursday', seconds: 1480},
               {day: 'Friday', seconds: 0}];
 
 const centersData = [{name: 'Opened', value: 400}, {name: 'Closed', value: 300}];
 
 const COLORS = ['#0088FE', '#ff7300', '#FFBB28', '#FF8042'];
-
-const RADIAN = Math.PI / 180;                    
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
- 	const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x  = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy  + radius * Math.sin(-midAngle * RADIAN);
- 
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} 	dominantBaseline="central">
-    	{`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
 
 const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
@@ -80,7 +67,7 @@ class TwoLevelPieChart extends React.Component{
 
   onPieEnter = (data, index) => {
       this.setState({activeIndex: index})
-  }
+  };
 
   render(){
 
@@ -109,21 +96,6 @@ class TwoLevelPieChart extends React.Component{
 class Dashboard extends React.Component{
 
     render(){
-
-        const CentersStatusChart = () => {
-            return (
-                <ResponsiveContainer>
-                    <PieChart>
-                        <Pie data={centersData} fill="#8884d8" label={renderCustomizedLabel} innerRadius={40} outerRadius={80}>
-                        {
-                            centersData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
-                        }
-                        </Pie>
-                        <Tooltip/>
-                    </PieChart>
-                </ResponsiveContainer>
-            );
-        };
 
         const UptimeChart = () => {
             return (
@@ -165,7 +137,7 @@ class Dashboard extends React.Component{
                     
                     <div className="Row Active">
                         <Card interactive elevation={Elevation.ONE} className="Item">
-                            <h3 className="Item_Header"><Text ellipsize={true}>Computers</Text></h3>
+                            <h3 className="Item_Header"><Text ellipsize={true}>MRWs</Text></h3>
                             <div className="Content">
                                 <div className="On">
                                     <h4 className="Header"><Text ellipsize={true}>Active</Text></h4>
@@ -182,7 +154,7 @@ class Dashboard extends React.Component{
                             </div>
                         </Card>
                         <Card interactive elevation={Elevation.ONE} className="Item">
-                            <h3 className="Item_Header"><Text ellipsize={true}>Processes</Text></h3>
+                            <h3 className="Item_Header"><Text ellipsize={true}>MRWs Processes</Text></h3>
                             <div className="Content">
                                 <div className="Services">
                                     <h4 className="Header"><Text ellipsize={true}>Services</Text></h4>
@@ -201,7 +173,7 @@ class Dashboard extends React.Component{
                     </div>
 
                     <Card interactive elevation={Elevation.ONE} className="Row Certificates">
-                        <h3 className="Item_Header"><Text ellipsize={true}>Machine Certificate</Text></h3>
+                        <h3 className="Item_Header"><Text ellipsize={true}>MRWs Certificates</Text></h3>
                         <div className="Content">
                                 <div className="Valid">
                                     <h4 className="Header"><Text ellipsize={true}>Still Valid</Text></h4>
@@ -341,20 +313,20 @@ class Dashboard extends React.Component{
 
                 <Card className="Box">
                     <Card interactive elevation={Elevation.ONE} className="Row Uptime">
-                        <h3 className="Item_Header"><Text ellipsize={true}>Log for Uptime</Text></h3>
+                        <h3 className="Item_Header"><Text ellipsize={true}>Log for Centers Uptime</Text></h3>
                         <div className="Content">
                             <UptimeChart/>
                         </div>
                     </Card>
                     <Card interactive elevation={Elevation.ONE} className="Row Downtime">
-                        <h3 className="Item_Header"><Text ellipsize={true}>Log for Downtime</Text></h3>
+                        <h3 className="Item_Header"><Text ellipsize={true}>Log for Centers Downtime</Text></h3>
                         <div className="Content">
-                            <UptimeChart/>
+                            <DowntimeChart/>
                         </div>
                     </Card>
 
                     <Card interactive elevation={Elevation.ONE} className="Row CentersStatusChart">
-                        <h3 className="Item_Header"><Text ellipsize={true}>Centers</Text></h3>
+                        <h3 className="Item_Header"><Text ellipsize={true}>Centers Stats</Text></h3>
                         <div className="Content">
                             <TwoLevelPieChart/>
                         </div>

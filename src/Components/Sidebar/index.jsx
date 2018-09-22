@@ -3,7 +3,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import './index.css';
 import {connect} from "react-redux";
-// import * as gates from '../../api/constants/Gates';
+// import * as gates from '../../api/constants/Pages';
 // import Can from "../../helpers/Can";
 
 class Sidebar extends React.Component{
