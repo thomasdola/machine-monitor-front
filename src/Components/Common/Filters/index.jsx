@@ -155,9 +155,9 @@ class Filters extends React.Component{
                 <Popover
                     hasBackdrop
                     interactionKind={PopoverInteractionKind.CLICK}
-                    canEscapeKeyClose={false} popoverClassName="bms-popover" lazy position={Position.BOTTOM}>
+                    canEscapeKeyClose={false} popoverClassName="mm-popover" lazy position={Position.BOTTOM}>
                     <Tooltip content="filter" position={Position.BOTTOM}>
-                        <Button icon="filter" className={filtersCount > 0 && 'pt-intent-primary'}>
+                        <Button icon="filter" className={filtersCount > 0 && 'bp3-intent-primary'}>
                             {
                                 filtersCount > 0 &&
                                 [

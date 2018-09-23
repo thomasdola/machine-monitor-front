@@ -7,8 +7,8 @@ export const loadLogs = (token, params) => dispatch => {
 
     return LogApi
         .list(token, params)
-        .then(({data, meta: {pagination}}) => {
-            dispatch({type: actionTypes.LOAD_LOGS_SUCCESS, logs: data, pagination});
+        .then(({data: {logs, meta: {pagination}}}) => {
+            dispatch({type: actionTypes.LOAD_LOGS_SUCCESS, logs, pagination});
         })
         .catch(error => {
             dispatch({type: actionTypes.LOAD_LOGS_FAILED});
@@ -21,7 +21,7 @@ export const exportLogs = (token, params) => dispatch => {
 
     return LogApi
         .export(token, params)
-        .then(({scheduled}) => {
+        .then(({data: {scheduled}}) => {
             dispatch({type: actionTypes.EXPORT_LOGS_SUCCESS});
             dispatch({
                 type: actionTypes.OPERATION_SUCCESSFUL,

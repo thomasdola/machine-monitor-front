@@ -4,36 +4,52 @@
 .Map__Page {
   color: #394b59 !important;
   display: flex;
+  position: relative;
   justify-content: space-between;
   height: 100%;
   width: 100%; }
-  .Map__Page .ol-attribution ul, .Map__Page .ol-attribution button {
+  .Map__Page .ol-attribution ul, .Map__Page .ol-attribution button, .Map__Page .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
     display: none !important; }
   .Map__Page .Map__Box {
-    width: calc(100% - 200px);
+    width: 100%;
     height: 100%; }
     .Map__Page .Map__Box #map {
       height: 100%; }
+    .Map__Page .Map__Box .mapboxgl-popup-content {
+      padding: 0; }
+    .Map__Page .Map__Box .Center__Details__Popup {
+      max-width: 300px;
+      padding: 0 !important; }
+      .Map__Page .Map__Box .Center__Details__Popup .Header {
+        color: #394b59 !important;
+        font-size: 1.5em;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 30px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0; }
+      .Map__Page .Map__Box .Center__Details__Popup .Content {
+        padding: 10px;
+        max-height: calc(100% - 30px);
+        overflow-y: auto; }
+        .Map__Page .Map__Box .Center__Details__Popup .Content .Machine {
+          display: flex;
+          justify-content: space-around;
+          align-items: center; }
   .Map__Page .Machines__Box {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 200px;
+    position: absolute;
     border-radius: 0;
-    padding: 4px; }
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding-right: 4px;
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: none;
+    height: 50px;
+    z-index: 999999; }
     .Map__Page .Machines__Box .Header {
-      height: 40px; }
-    .Map__Page .Machines__Box .Content {
-      max-height: calc(100% - 41px);
-      overflow-y: auto; }
-      .Map__Page .Machines__Box .Content .Machine {
-        padding: 1px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px dashed #394b59; }
-        .Map__Page .Machines__Box .Content .Machine .Name {
-          text-align: center;
-          font-size: 1.3em;
-          font-variant: small-caps;
-          width: 80%; }
+      height: 40px;
+      width: 25%;
+      margin: 0; }

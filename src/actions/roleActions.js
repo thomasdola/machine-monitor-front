@@ -3,13 +3,19 @@ import {getTime} from "date-fns";
 import RoleApi from '../api/actual/roleApi';
 import RoleDependenciesApi from '../api/actual/roleDependencyApi';
 
+export const selectPage = page => ({type: actionTypes.SELECT_PAGE, page});
+
+export const selectRole = role => ({type: actionTypes.SELECT_ROLE, role});
+
+export const selectEntity = entity => ({type: actionTypes.SELECT_ENTITY, entity});
+
 export const loadRoles = (token, params) => dispatch => {
     dispatch({type: actionTypes.LOAD_ROLES});
 
     return RoleApi
         .list(token, params)
-        .then(({data, meta: {pagination}}) => {
-            dispatch({type: actionTypes.LOAD_ROLES_SUCCESSFUL, groups: data, pagination});
+        .then(({data: {roles, meta: {pagination}}}) => {
+            dispatch({type: actionTypes.LOAD_ROLES_SUCCESSFUL, roles, pagination});
         })
         .catch(error => {
             dispatch({type: actionTypes.LOAD_ROLES_FAILED});
@@ -22,7 +28,7 @@ export const addRole = (token, data) => dispatch => {
 
     return RoleApi
         .add(token, data)
-        .then(({added}) => {
+        .then(({data: {added}}) => {
             if(added){
                 dispatch({type: actionTypes.ADD_ROLE_SUCCESSFUL});
                 dispatch({
@@ -49,7 +55,7 @@ export const editRole = (token, role, data, action = null) => dispatch => {
 
     return RoleApi
         .edit(token, role, data)
-        .then(({updated}) => {
+        .then(({data: {updated}}) => {
             if(updated){
                 dispatch({type: actionTypes.EDIT_ROLE_SUCCESSFUL});
                 action = action ? action : actionTypes.EDIT_ROLE;
@@ -77,7 +83,7 @@ export const deleteRole = (token, role) => dispatch => {
 
     return RoleApi
         .delete(token, role)
-        .then(({deleted}) => {
+        .then(({data: {deleted}}) => {
             if(deleted){
                 dispatch({type: actionTypes.DELETE_ROLE_SUCCESSFUL});
                 dispatch({

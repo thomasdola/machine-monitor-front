@@ -1,0 +1,212 @@
+@import "@blueprintjs/core/lib/scss/variables";
+$header-height: 35px;
+
+.Centers__Page{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    //background: $pt-app-background-color;
+    color: $dark-gray3;
+
+    .centers__toolbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        background: white;
+        border: 1px solid rgba(16,22,26,.15);
+        border-top: 0;
+        height: 40px;
+    }
+}
+
+.transparent__back{
+    background-color: transparent !important;
+}
+.centers__content{
+    padding: 10px;
+    height: calc(100% - 40px);
+    display: flex;
+
+    .List{
+        padding: 0;
+        height: 100%;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: white;
+
+        .Header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+            width: 100%;
+            height: $header-height;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            box-shadow: 0 1px 0 rgba(16,22,26,.15);
+            font-variant: small-caps;
+            font-size: 1.1em;
+            font-weight: bold;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+
+            div.per-page__wrapper{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: normal;
+
+                span{
+                    margin: 0 3px 0 5px;
+                }
+            }
+        }
+
+        .Table__Content{
+            height: calc(100% - #{$header-height} - 1px);
+        }
+
+        .table__wrapper{
+            overflow: hidden !important;
+            border-bottom-left-radius: 3px !important;
+            border-bottom-right-radius: 3px !important;
+            height: 100% !important;
+            //border: 1px solid rgba(16,22,26,.15) !important;
+            border-top: 0 !important;
+            width: 100%;
+
+            &:focus{
+                outline: none !important;
+            }
+        }
+
+        .table__header{
+            color: $dark-gray3 !important;
+            font-size: 14px !important;
+            line-height: 1 !important;
+            background-image: linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0)) !important;
+            background-color: #f5f8fa !important;
+            border: none !important;
+            font-weight: bold !important;
+            font-variant: small-caps;
+        }
+
+        .table__cell{
+            border: none !important;
+        }
+
+        .table__sort__header{
+            cursor: pointer;
+        }
+
+        .fixedDataTableCellLayout_main:last-child{
+            border-right: 0 !important;
+        }
+    }
+
+    .Details{
+        padding: 0;
+        margin-left: 10px;
+        height: 100%;
+        width: 60%;
+
+        & > .Header, .Deployment > .Header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px;
+            width: 100%;
+            height: $header-height;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            box-shadow: 0 1px 0 rgba(16,22,26,.15);
+            font-variant: small-caps;
+            font-size: 1.1em;
+            font-weight: bold;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+        }
+
+        .Content{
+            max-height: calc(100% - #{$header-height} - 1px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+
+            .Basics, .Location, .Contact, .Recommendations{
+                margin-top: 5px;
+                margin-bottom: 10px;
+
+                .mm-input-group{
+                    width: 45%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-bottom: 0;
+
+                    .mm-label{
+                        width: 40%;
+                    }
+
+                    .mm-input{
+                        width: 60%;
+                    }
+                }
+
+                & > .Header{
+                    font-size: 1.5em;
+                    font-variant: all-petite-caps;
+                    height: 40px;
+                    margin-bottom: 5px;
+                }
+                & > .Content__Simple{
+                    justify-content: space-evenly;
+
+                    .Column{
+                        width: 45%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        .mm-input-group{
+                            width: 100%;
+                            margin-bottom: 20px;
+                        }
+                    }
+                }
+            }
+
+            .Deployment{
+                padding: 0;
+                height: 140px;
+
+                .Table__Content{
+                    height: calc(100% - #{$header-height} - 2px);
+                }
+            }
+
+            .Location__Sketch__Preview{
+                width: 300px;
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .Content__Simple{
+                display: flex;
+            }
+
+            .Content{
+                display: flex;
+                //justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
+    }
+}

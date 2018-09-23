@@ -47,8 +47,8 @@ export default class Filter extends React.Component {
         const {onFilterChosen} = this.props;
         const rows = this.props.filters.map(function(row){
             return (
-                <div key={row.label} className="bms-collapse-row">
-                    <div className="bms-collapse-row-label" >
+                <div key={row.label} className="mm-collapse-row">
+                    <div className="mm-collapse-row-label" >
                         <Checkbox
                             disabled={row.disabled}
                             checked={row.isExpanded} 
@@ -57,7 +57,7 @@ export default class Filter extends React.Component {
                         </Checkbox>
                     </div>
                     <Collapse keepChildrenMounted={true} isOpen={row.isExpanded}>
-                        <div className="bms-collapse-row-content">
+                        <div className="mm-collapse-row-content">
                             <row.body.component {...row.body.props} onChange={onFilterChosen}/>
                         </div>
                     </Collapse>
@@ -69,13 +69,13 @@ export default class Filter extends React.Component {
             <div>
                 <div className="header">
                     <Button
-                        className="pt-small"
+                        className="bp3-small"
                         onClick={this._handleClearFilters}>clear</Button>
                     <Button
-                        className="pt-small"
+                        className="bp3-small"
                         onClick={this._handleApplyFilters}>done</Button>
                 </div>
-                <div className="bms-collapse">
+                <div className="mm-collapse">
                     {rows}
                 </div>
             </div>

@@ -40,7 +40,6 @@ import {
 } from '../../../../actions/socket/MachineActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import "./index.css";
 import laptop from '../../../../notebook-computer.default.svg';
 import _isEqual from "lodash/isEqual";
 import _isEmpty from 'lodash/isEmpty';
@@ -160,9 +159,9 @@ class Information extends React.Component {
 
         const canPerform = machineProfile.power === 'ON';
 
-        const network = machineProfile.network[0] ? machineProfile.network[0] : []
+        const network = machineProfile.network[0] ? machineProfile.network[0] : [];
 
-        console.log(network)
+        console.log(network);
 
         return [
             <img key={"icon"} alt="MRW" width={150} height={150} src={laptop}/>,
@@ -193,16 +192,15 @@ class Information extends React.Component {
                                 </div>
                             </div>
 
-                            <div style={{height: 500}} className="Applications" key={"network"}>
+                            <div className="Network" key={"network"}>
                                 <h3>Network</h3>
                                 {   !_isEmpty(network) &&
                                     network.map(({name, value}) => {
-                                        // const id = _find(adapter, ({name}) => name === "id");
                                         value = _isBoolean(value) ? (
                                             value === true ? "yes" : "no"
-                                        ) : value 
+                                        ) : value;
                                         return (
-                                            <div className="row">
+                                            <div className="row network">
                                                 <span className="name">{name}</span>
                                                     <span><Tag minimal
                                                             intent={Intent.NONE}>{value}</Tag></span>
@@ -294,12 +292,12 @@ class Information extends React.Component {
                                     </ButtonGroup>
                                 </form>
                             </Popover>
-                            <Popover isOpen={this.state.confirmPowerOff} interactionKind={PopoverInteractionKind.CLICK}
+                            <Popover isOpen={this.state.confirmReboot} interactionKind={PopoverInteractionKind.CLICK}
                                      disabled={!canPerform}>
 
                                 <ButtonGroup minimal fill>
                                     <Button
-                                        onClick={() => this.setState({confirmPowerOff: true})}
+                                        onClick={() => this.setState({confirmReboot: true})}
                                         disabled={!canPerform}
                                         intent={Intent.WARNING}
                                         icon="refresh"
@@ -310,11 +308,11 @@ class Information extends React.Component {
                                     <span style={{marginBottom: 10}}>Are you sure?</span>
                                     <ButtonGroup fill minimal>
                                         <Button
-                                            onClick={() => this.setState({confirmPowerOff: false})}
+                                            onClick={() => this.setState({confirmReboot: false})}
                                             minimal small intent={Intent.DANGER}
                                                 icon="cross"/>
                                         <Button minimal small intent={Intent.SUCCESS}
-                                                onClick={() => {this.powerOff(); this.setState({confirmPowerOff: false})}}
+                                                onClick={() => {this.powerOff(); this.setState({confirmReboot: false})}}
                                                 icon="tick"/>
                                     </ButtonGroup>
                                 </div>

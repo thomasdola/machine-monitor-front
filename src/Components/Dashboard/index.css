@@ -37,6 +37,7 @@
           .Dashboard .Box .Active .Item .Content .Value {
             font-size: 2em; }
     .Dashboard .Box .Certificates {
+      height: 22%;
       margin-top: 8px; }
       .Dashboard .Box .Certificates .Content {
         display: flex;

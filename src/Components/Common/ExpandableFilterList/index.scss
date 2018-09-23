@@ -8,7 +8,7 @@
     background-color: $pt-app-background-color;
 }
 
-.bms-collapse{
+.mm-collapse{
     list-style-type: none;
     margin: 0 !important;
     padding: 0 !important;
@@ -16,11 +16,11 @@
     flex-direction: column;
     width: 100% !important;
 
-    .bms-collapse-row{
+    .mm-collapse-row{
         text-align: left;
         flex-grow: 1;
 
-        .bms-collapse-row-label{
+        .mm-collapse-row-label{
             padding: 10px;
             border-bottom: 1px solid #e6ebf1;
             text-align: left;
@@ -35,22 +35,22 @@
             font-size: 14px;
         }
 
-        .bms-collapse-row-content{
+        .mm-collapse-row-content{
             padding: 10px;
             border-bottom: 1px solid #e6ebf1;
             background-color: $pt-app-background-color;
         }
     }
 
-    .bms-collapse-row:first-child .bms-collapse-row-label{
+    .mm-collapse-row:first-child .mm-collapse-row-label{
         border-top: 1px solid #e6ebf1;
     }
 
-    .bms-collapse-row:last-child{
-        .bms-collapse-row-label{
+    .mm-collapse-row:last-child{
+        .mm-collapse-row-label{
             border: none;
         }
-        .bms-collapse-row-content{
+        .mm-collapse-row-content{
             border-top: 1px solid #e6ebf1;
             border-bottom: none;
         }

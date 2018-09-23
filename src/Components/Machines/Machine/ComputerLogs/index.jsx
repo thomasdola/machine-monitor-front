@@ -52,7 +52,7 @@ class ComputerLogs extends React.Component {
                 <div className="actions">
                     <ButtonGroup>
                         <Popover>
-                            <Button intent={Intent.NONE} className="pt-small" icon="filter"/>
+                            <Button intent={Intent.NONE} className="bp3-small" icon="filter"/>
                             <form style={{padding: 5, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}} action="">
                                 <div style={{marginBottom: 5}}>
                                     <DateRangeInput
@@ -72,7 +72,7 @@ class ComputerLogs extends React.Component {
                             </form>
                         </Popover>
                         <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
-                            <Button intent={Intent.NONE} className="pt-small" icon="export"/>
+                            <Button intent={Intent.NONE} className="bp3-small" icon="export"/>
                             <form style={{padding: 5, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}} action="">
                                 <div style={{marginBottom: 5}}>
                                     <InputGroup placeholder={"Filename"}/>

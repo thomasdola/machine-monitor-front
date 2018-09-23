@@ -22,6 +22,7 @@ $att-list-width: 60%;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      overflow-y: auto;
 
       .power {
         margin-bottom: 10px;
@@ -33,6 +34,9 @@ $att-list-width: 60%;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        min-height: 150px;
+        max-height: 300px;
+        overflow-y: auto;
 
         .row {
           width: 80%;

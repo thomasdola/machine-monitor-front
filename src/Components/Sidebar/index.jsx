@@ -42,7 +42,7 @@ class Sidebar extends React.Component{
                                 <Link
                                     to={'/machines'}
                                     className="bp3-button bp3-large bp3-fill bp3-minimal bp3-icon-standard bp3-icon-desktop">
-                                    Machines
+                                    MRWs
                                 </Link>
                             </li>
                         {/*)}*/}

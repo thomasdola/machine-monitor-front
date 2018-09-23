@@ -5,6 +5,16 @@ export const Active = Loadable({
     loading: () => null
 });
 
+export const Region = Loadable({
+    loader: () => import('./Regions'),
+    loading: () => null
+});
+
+export const District = Loadable({
+    loader: () => import('./Districts'),
+    loading: () => null
+});
+
 export const Date = Loadable({
     loader: () => import('./Date'),
     loading: () => null

@@ -6,9 +6,9 @@ import "@blueprintjs/datetime/lib/css/blueprint-datetime.css";
 
 const DateInputSmall = ({...props}) => (
     <Popover inline={true}>
-        <div className="pt-input-group bms-small">
-            <span className="pt-icon pt-icon-calendar"/>
-            <input type="text" className="pt-input"/>
+        <div className="bp3-input-group mm-small">
+            <span className="bp3-icon bp3-icon-calendar"/>
+            <input type="text" className="bp3-input"/>
         </div>
         <DatePicker {...props}/>
     </Popover>
@@ -20,7 +20,7 @@ export const ShortList = ({defaultValue, items, onChange}) => {
         return <option key={item.id} value={item.value}>{item.name}</option>
     });
     return (
-        <div className="pt-select bms-small pt-fill">
+        <div className="bp3-select mm-small bp3-fill">
             <select value={defaultValue} onChange={onChange}>
                 {list}
             </select>
@@ -33,7 +33,7 @@ export const LongList = ({defaultValue, items, onChange}) => {
         return <option key={item.id} value={item.value}>{item.name}</option>
     });
     return (
-        <div className="pt-select bms-small pt-fill">
+        <div className="bp3-select mm-small bp3-fill">
             <select value={defaultValue} onChange={onChange}>
                 {list}
             </select>

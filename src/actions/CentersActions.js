@@ -1,32 +1,32 @@
 import * as actionTypes from '../helpers/constants';
-import UserApi from '../api/actual/userApi';
+import CenterApi from '../api/actual/centerApi';
 import {getTime} from "date-fns";
 
 
-export const loadUsers = (token, params) => dispatch => {
-    dispatch({type: actionTypes.LOAD_USERS});
+export const loadCenters = (token, params) => dispatch => {
+    dispatch({type: actionTypes.LOAD_CENTERS});
 
-    return UserApi
+    return CenterApi
         .list(token, params)
-        .then(({data: {users, meta: {pagination}}}) => {
-            dispatch({type: actionTypes.LOAD_USERS_SUCCESSFUL, users, pagination});
+        .then(({data: {centers, meta: {pagination}}}) => {
+            dispatch({type: actionTypes.LOAD_CENTERS_SUCCESSFUL, centers, pagination});
         })
         .catch(error => {
-            dispatch({type: actionTypes.LOAD_USERS_FAILED});
+            dispatch({type: actionTypes.LOAD_CENTERS_FAILED});
             console.log(error);});
 };
 
-export const addUser = (token, data) => dispatch => {
-    dispatch({type: actionTypes.ADD_USER});
+export const addCenter = (token, data) => dispatch => {
+    dispatch({type: actionTypes.ADD_CENTER});
 
-    return UserApi
+    return CenterApi
         .add(token, data)
         .then(({data: {added}}) => {
             if(added){
-                dispatch({type: actionTypes.ADD_USER_SUCCESSFUL});
+                dispatch({type: actionTypes.ADD_CENTER_SUCCESSFUL});
                 dispatch({
                     type: actionTypes.OPERATION_SUCCESSFUL,
-                    action: actionTypes.ADD_USER,
+                    action: actionTypes.ADD_CENTER,
                     timestamp: getTime(Date()),
                     data: {added}
                 });
@@ -39,19 +39,19 @@ export const addUser = (token, data) => dispatch => {
                 timestamp: getTime(Date()),
                 data: {...error}
             });
-            dispatch({type: actionTypes.ADD_USER_FAILED});
+            dispatch({type: actionTypes.ADD_CENTER_FAILED});
             console.log(error);
         });
 };
-export const editUser = (token, user, data, action = null) => dispatch => {
-    dispatch({type: actionTypes.EDIT_USER});
+export const editCenter = (token, center, data, action = null) => dispatch => {
+    dispatch({type: actionTypes.EDIT_CENTER});
 
-    return UserApi
-        .edit(token, user, data)
+    return CenterApi
+        .edit(token, center, data)
         .then(({data: {updated}}) => {
             if(updated){
-                dispatch({type: actionTypes.EDIT_USER_SUCCESSFUL});
-                action = action ? action : actionTypes.EDIT_USER;
+                dispatch({type: actionTypes.EDIT_CENTER_SUCCESSFUL});
+                action = action ? action : actionTypes.EDIT_CENTER;
                 dispatch({
                     type: actionTypes.OPERATION_SUCCESSFUL,
                     action,
@@ -63,25 +63,25 @@ export const editUser = (token, user, data, action = null) => dispatch => {
         .catch(error => {
             dispatch({
                 type: actionTypes.OPERATION_FAILED,
-                action: actionTypes.EDIT_USER,
+                action: actionTypes.EDIT_CENTER,
                 timestamp: getTime(Date()),
                 data: {...error}
             });
-            dispatch({type: actionTypes.EDIT_USER_FAILED});
+            dispatch({type: actionTypes.EDIT_CENTER_FAILED});
             console.log(error);
         });
 };
-export const deleteUser = (token, user) => dispatch => {
-    dispatch({type: actionTypes.DELETE_USER});
+export const deleteCenter = (token, center) => dispatch => {
+    dispatch({type: actionTypes.DELETE_CENTER});
 
-    return UserApi
-        .delete(token, user)
+    return CenterApi
+        .delete(token, center)
         .then(({data: {deleted}}) => {
             if(deleted){
-                dispatch({type: actionTypes.DELETE_USER_SUCCESSFUL});
+                dispatch({type: actionTypes.DELETE_CENTER_SUCCESSFUL});
                 dispatch({
                     type: actionTypes.OPERATION_SUCCESSFUL,
-                    action: actionTypes.DELETE_USER,
+                    action: actionTypes.DELETE_CENTER,
                     timestamp: getTime(Date()),
                     data: {deleted}
                 });
@@ -90,11 +90,11 @@ export const deleteUser = (token, user) => dispatch => {
         .catch(error => {
             dispatch({
                 type: actionTypes.OPERATION_FAILED,
-                action: actionTypes.DELETE_USER,
+                action: actionTypes.DELETE_CENTER,
                 timestamp: getTime(Date()),
                 data: {...error}
             });
-            dispatch({type: actionTypes.DELETE_USER_FAILED});
+            dispatch({type: actionTypes.DELETE_CENTER_FAILED});
             console.log(error);
         });
 };

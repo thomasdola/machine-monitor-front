@@ -16,25 +16,12 @@ export const loadPolicies = (token, params = {}) => dispatch => {
             console.log(error);});
 };
 
-export const loadRolePolicies = (token, params) => dispatch => {
-    dispatch({type: actionTypes.LOAD_ROLE_POLICIES});
-
-    return PolicyApi
-        .list(token, params)
-        .then(policies => {
-            dispatch({type: actionTypes.LOAD_ROLE_POLICIES_SUCCESSFUL, policies});
-        })
-        .catch(error => {
-            dispatch({type: actionTypes.LOAD_ROLE_POLICIES_FAILED});
-            console.log(error);});
-};
-
 export const addPolicy = (token, data) => dispatch => {
     dispatch({type: actionTypes.ADD_POLICY});
 
     return PolicyApi
         .add(token, data)
-        .then(({added}) => {
+        .then(({data: {added}}) => {
             if(added){
                 dispatch({type: actionTypes.ADD_POLICY_SUCCESSFUL});
                 dispatch({
@@ -61,7 +48,7 @@ export const editPolicy = (token, policy, data) => dispatch => {
 
     return PolicyApi
         .edit(token, policy, data)
-        .then(({updated}) => {
+        .then(({data: {updated}}) => {
             if(updated){
                 dispatch({type: actionTypes.EDIT_POLICY_SUCCESSFUL});
 
@@ -89,7 +76,7 @@ export const deletePolicy = (token, policy) => dispatch => {
 
     return PolicyApi
         .delete(token, policy)
-        .then(({deleted}) => {
+        .then(({data: {deleted}}) => {
             if(deleted){
                 dispatch({type: actionTypes.DELETE_POLICY_SUCCESSFUL});
                 dispatch({

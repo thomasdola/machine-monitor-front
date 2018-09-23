@@ -1,0 +1,153 @@
+/*
+ * Copyright 2017 Palantir Technologies, Inc. All rights reserved.
+ */
+.Centers__Page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #293742; }
+  .Centers__Page .centers__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background: white;
+    border: 1px solid rgba(16, 22, 26, 0.15);
+    border-top: 0;
+    height: 40px; }
+
+.transparent__back {
+  background-color: transparent !important; }
+
+.centers__content {
+  padding: 10px;
+  height: calc(100% - 40px);
+  display: flex; }
+  .centers__content .List {
+    padding: 0;
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white; }
+    .centers__content .List .Header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+      width: 100%;
+      height: 35px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      box-shadow: 0 1px 0 rgba(16, 22, 26, 0.15);
+      font-variant: small-caps;
+      font-size: 1.1em;
+      font-weight: bold;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); }
+      .centers__content .List .Header div.per-page__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: normal; }
+        .centers__content .List .Header div.per-page__wrapper span {
+          margin: 0 3px 0 5px; }
+    .centers__content .List .Table__Content {
+      height: calc(100% - 35px - 1px); }
+    .centers__content .List .table__wrapper {
+      overflow: hidden !important;
+      border-bottom-left-radius: 3px !important;
+      border-bottom-right-radius: 3px !important;
+      height: 100% !important;
+      border-top: 0 !important;
+      width: 100%; }
+      .centers__content .List .table__wrapper:focus {
+        outline: none !important; }
+    .centers__content .List .table__header {
+      color: #293742 !important;
+      font-size: 14px !important;
+      line-height: 1 !important;
+      background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) !important;
+      background-color: #f5f8fa !important;
+      border: none !important;
+      font-weight: bold !important;
+      font-variant: small-caps; }
+    .centers__content .List .table__cell {
+      border: none !important; }
+    .centers__content .List .table__sort__header {
+      cursor: pointer; }
+    .centers__content .List .fixedDataTableCellLayout_main:last-child {
+      border-right: 0 !important; }
+  .centers__content .Details {
+    padding: 0;
+    margin-left: 10px;
+    height: 100%;
+    width: 60%; }
+    .centers__content .Details > .Header, .centers__content .Details .Deployment > .Header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+      width: 100%;
+      height: 35px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      box-shadow: 0 1px 0 rgba(16, 22, 26, 0.15);
+      font-variant: small-caps;
+      font-size: 1.1em;
+      font-weight: bold;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); }
+    .centers__content .Details .Content {
+      max-height: calc(100% - 35px - 1px);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px; }
+      .centers__content .Details .Content .Basics, .centers__content .Details .Content .Location, .centers__content .Details .Content .Contact, .centers__content .Details .Content .Recommendations {
+        margin-top: 5px;
+        margin-bottom: 10px; }
+        .centers__content .Details .Content .Basics .mm-input-group, .centers__content .Details .Content .Location .mm-input-group, .centers__content .Details .Content .Contact .mm-input-group, .centers__content .Details .Content .Recommendations .mm-input-group {
+          width: 45%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-bottom: 0; }
+          .centers__content .Details .Content .Basics .mm-input-group .mm-label, .centers__content .Details .Content .Location .mm-input-group .mm-label, .centers__content .Details .Content .Contact .mm-input-group .mm-label, .centers__content .Details .Content .Recommendations .mm-input-group .mm-label {
+            width: 40%; }
+          .centers__content .Details .Content .Basics .mm-input-group .mm-input, .centers__content .Details .Content .Location .mm-input-group .mm-input, .centers__content .Details .Content .Contact .mm-input-group .mm-input, .centers__content .Details .Content .Recommendations .mm-input-group .mm-input {
+            width: 60%; }
+        .centers__content .Details .Content .Basics > .Header, .centers__content .Details .Content .Location > .Header, .centers__content .Details .Content .Contact > .Header, .centers__content .Details .Content .Recommendations > .Header {
+          font-size: 1.5em;
+          font-variant: all-petite-caps;
+          height: 40px;
+          margin-bottom: 5px; }
+        .centers__content .Details .Content .Basics > .Content__Simple, .centers__content .Details .Content .Location > .Content__Simple, .centers__content .Details .Content .Contact > .Content__Simple, .centers__content .Details .Content .Recommendations > .Content__Simple {
+          justify-content: space-evenly; }
+          .centers__content .Details .Content .Basics > .Content__Simple .Column, .centers__content .Details .Content .Location > .Content__Simple .Column, .centers__content .Details .Content .Contact > .Content__Simple .Column, .centers__content .Details .Content .Recommendations > .Content__Simple .Column {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; }
+            .centers__content .Details .Content .Basics > .Content__Simple .Column .mm-input-group, .centers__content .Details .Content .Location > .Content__Simple .Column .mm-input-group, .centers__content .Details .Content .Contact > .Content__Simple .Column .mm-input-group, .centers__content .Details .Content .Recommendations > .Content__Simple .Column .mm-input-group {
+              width: 100%;
+              margin-bottom: 20px; }
+      .centers__content .Details .Content .Deployment {
+        padding: 0;
+        height: 140px; }
+        .centers__content .Details .Content .Deployment .Table__Content {
+          height: calc(100% - 35px - 2px); }
+      .centers__content .Details .Content .Location__Sketch__Preview {
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+      .centers__content .Details .Content .Content__Simple {
+        display: flex; }
+      .centers__content .Details .Content .Content {
+        display: flex;
+        align-items: center;
+        width: 100%; }

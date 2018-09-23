@@ -13,6 +13,11 @@ import {logs as systemLogs, loading as loadingSystemLogs, pagination as systemLo
 import {policies, loading as loadingPolicies, adding as addingPolicy, editing as editingPolicy, deleting as deletingPolicy} from './policies';
 import {roles, pagination as rolesPagination, deleting as deletingRole, editing as editingRole, adding as addingRole, loading as loadingRoles} from './roles';
 import {users, pagination as usersPagination, loading as loadingUsers, adding as addingUser, editing as editingUser, deleting as deletingUser} from './users';
+import {regions, loading as loadingRegions} from './Regions';
+import {districts, loading as loadingDistricts} from './Districts';
+import {centers, loading as loadingCenters, pagination as centersPagination, deleting as deletingCenter, editing as editingCenter, adding as addingCenter} from './centers';
+import {region as regionFilter, district as districtFilter, page as pageFilter, role as roleFilter, entity as entityFilter} from './filter';
+
 import {socket, userChannel} from './Socket';
 
 export default combineReducers({
@@ -30,5 +35,9 @@ export default combineReducers({
     policies, loadingPolicies, addingPolicy, editingPolicy, deletingPolicy,
     roles, rolesPagination, deletingRole, editingRole, addingRole, loadingRoles,
     users, usersPagination, loadingUsers, addingUser, editingUser, deletingUser,
-    systemLogs, loadingSystemLogs, systemLogsPagination, exportingSystemLogs
+    systemLogs, loadingSystemLogs, systemLogsPagination, exportingSystemLogs,
+    regions, loadingRegions,
+    districts, loadingDistricts,
+    centers, loadingCenters, centersPagination, deletingCenter, editingCenter, addingCenter,
+    regionFilter, districtFilter, pageFilter, roleFilter, entityFilter
 });

@@ -5,7 +5,6 @@ import Loading from '../Loading';
 import {AuthorizedRoute} from '../../index';
 import * as gates from '../../api/constants/Pages';
 import {connect} from "react-redux";
-import MachinesMap from '../MachinesMap';
 
 const Dashboard = Loadable({
     loader: () => import('../Dashboard'),
@@ -41,11 +40,16 @@ const Consumables = Loadable({
     loader: () => import('../Consumables'),
     loading: () => <Loading/>,
 });
-//
-// const MachinesMap = Loadable({
-//     loader: () => import('../MachinesMap'),
-//     loading: () => <Loading/>,
-// });
+
+const MachinesMap = Loadable({
+    loader: () => import('../MachinesMap'),
+    loading: () => <Loading/>,
+});
+
+const Centers = Loadable({
+    loader: () => import('../Centers'),
+    loading: () => <Loading/>,
+});
 
 const Unauthorized = Loadable({
     loader: () => import('../Unauthorized'),
@@ -86,6 +90,13 @@ class Content extends React.Component{
                 user={user}
                 page={gates.USERS}
                 component={Users}/>,
+
+            <AuthorizedRoute
+                key={"Centers"}
+                path={"/centers"}
+                user={user}
+                page={gates.CENTERS}
+                component={Centers}/>,
 
             <AuthorizedRoute
                 key={"Map"}

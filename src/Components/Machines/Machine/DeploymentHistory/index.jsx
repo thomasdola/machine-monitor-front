@@ -49,31 +49,8 @@ class DeploymentHistory extends React.Component{
                 </div>
                 <div className="actions">
                     <ButtonGroup>
-                        <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
-                            <Button intent={Intent.NONE} className="pt-small" icon="add"/>
-                            <form style={{padding: 5, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}} action="">
-                                <div style={{marginBottom: 5}}>
-                                    <InputGroup placeholder={"Center"}/>
-                                </div>
-                                <div style={{marginBottom: 5}}>
-                                    <DateRangeInput
-                                        allowSingleDayRange={true}
-                                        formatDate={date => date.toLocaleString()}
-                                        onChange={this.handleRangeChange}
-                                        parseDate={str => new Date(str)}
-                                        value={[this.state.dStartDate, this.state.dEndDate]}
-                                    />
-                                </div>
-                                <ButtonGroup fill minimal>
-                                    <Button minimal small intent={Intent.DANGER}
-                                            icon="cross"/>
-                                    <Button minimal small intent={Intent.SUCCESS}
-                                            icon="tick"/>
-                                </ButtonGroup>
-                            </form>
-                        </Popover>
                         <Popover>
-                            <Button intent={Intent.NONE} className="pt-small" icon="filter"/>
+                            <Button intent={Intent.NONE} className="bp3-small" icon="filter"/>
                             <form style={{padding: 5, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}} action="">
                                 <div style={{marginBottom: 5}}>
                                     <DateRangeInput
@@ -93,7 +70,7 @@ class DeploymentHistory extends React.Component{
                             </form>
                         </Popover>
                         <Popover interactionKind={PopoverInteractionKind.CLICK_TARGET_ONLY}>
-                            <Button intent={Intent.NONE} className="pt-small" icon="export"/>
+                            <Button intent={Intent.NONE} className="bp3-small" icon="export"/>
                             <form style={{padding: 5, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}} action="">
                                 <div style={{marginBottom: 5}}>
                                     <InputGroup placeholder={"Filename"}/>

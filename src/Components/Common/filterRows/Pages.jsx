@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {loadPages, loadEntities} from '../../../actions/roleActions';
+import {loadPages, loadEntities, selectPage} from '../../../actions/roleActions';
 import {ShortList} from '../Lists';
 import _find from "lodash/find";
 import _isEqual from 'lodash/isEqual';
@@ -21,7 +21,7 @@ class Pages extends React.Component{
     componentDidMount(){
         const {loadPages, value} = this.props;
         loadPages();
-        this.props.loadEntities({f: `g|${value.id}`});
+        this.props.loadEntities({f: `page|${value.id}`});
     }
 
     componentDidUpdate(prevProps){
